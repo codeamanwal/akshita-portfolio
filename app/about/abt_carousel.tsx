@@ -115,7 +115,9 @@ export default function AbtCarousel() {
           id: item.id,
           order: item.order,
           image: item.image
-            ? { url: `${STRAPI_URL}${item.image.url}` }
+            ? { url: item.image.url.startsWith('http')
+              ? item.image.url
+              : `${STRAPI_URL}${item.image.url}` }
             : null,
         }));
 
