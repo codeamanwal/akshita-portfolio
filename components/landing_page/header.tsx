@@ -87,7 +87,7 @@ export default function Header() {
               href="/contact"
               className="bg-[#2C2216] text-[#fdf8e2] px-4 py-2 text-sm  flex items-center gap-1"
             >
-              start a project{" "}
+              start a projec{" "}
               <span>
                 {" "}
                 <Image
