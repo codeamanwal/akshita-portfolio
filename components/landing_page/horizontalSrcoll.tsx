@@ -36,12 +36,12 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ cards: propCards })
 
     const fetchImages = async () => {
       try {
-        const res = await fetch("http://localhost:1337/api/images?populate=brand&sort[0]=order:asc");
+        const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/images?populate=brand&sort[0]=order:asc`);
         const json = await res.json();
         if (json.data) {
           const mapped = json.data.map((item: any) => ({
             id: item.id,
-            url: `http://localhost:1337${item.brand.url}`, // prepend base URL
+            url: `${process.env.NEXT_PUBLIC_STRAPI_URL}${item.brand.url}`, // prepend base URL
             title: item.slug || item.brand.name, // fallback if slug missing
           }));
           setFetchedCards(mapped);

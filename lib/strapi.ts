@@ -12,9 +12,14 @@ export async function fetchFromStrapi(path: string) {
 }
 
 export function getStrapiMedia(url: string) {
+  try {
     const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
     if (!url) return '';
     // If already an absolute URL (like from Cloudinary), just return it
     if (url.startsWith('http')) return url;
     return `https://portfolio-cms-a0hn.onrender.com/api${url}`;
+  } catch (error) {
+    throw error
+  }
+    
 }
