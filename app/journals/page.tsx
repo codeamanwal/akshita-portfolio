@@ -20,7 +20,7 @@ export default function JournalsPage() {
         const formatted = data.data.map((item: any) => {
           const cover =
             Array.isArray(item?.coverImage) && item.coverImage.length > 0
-              ? `${process.env.NEXT_PUBLIC_STRAPI_URL}${item.coverImage[0].url}`
+              ? `${item.coverImage[0].url}`
               : null
         
           return {

@@ -41,7 +41,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ cards: propCards })
         if (json.data) {
           const mapped = json.data.map((item: any) => ({
             id: item.id,
-            url: `${process.env.NEXT_PUBLIC_STRAPI_URL}${item.brand.url}`, // prepend base URL
+            url: `${item.brand.url}`, // prepend base URL
             title: item.slug || item.brand.name, // fallback if slug missing
           }));
           setFetchedCards(mapped);

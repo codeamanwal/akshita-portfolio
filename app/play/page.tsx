@@ -224,7 +224,7 @@ export default async function PlayPage() {
   const products = await getProducts()
 
   const heroImageUrl =
-  hero?.heroImage?.url && `${STRAPI_URL}${hero.heroImage.url}`
+  hero?.heroImage?.url && `${hero.heroImage.url}`
 
   return (
     <>
@@ -272,7 +272,7 @@ export default async function PlayPage() {
             {products.map((product: any, index: number) => {
   const productImages =
     product?.images?.map(
-      (img: any) => `${STRAPI_URL}${img.url}`
+      (img: any) => `${img.url}`
     ) || []
 
   return (

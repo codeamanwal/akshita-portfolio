@@ -48,3 +48,12 @@ body {
       transform: translateX(-100%);
     }
 }
+
+.br-desktop {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .br-desktop {
+    display: inline;
+  }
+}

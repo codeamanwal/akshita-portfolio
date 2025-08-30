@@ -343,7 +343,7 @@ export default function WorkPage() {
                 ? attrs.tags.split(",").map((t: string) => t.trim().toLowerCase())
                 : [],
               image: attrs.image?.url
-                ? `${STRAPI_URL}${attrs.image.url}`
+                ? `${attrs.image.url}`
                 : "/placeholder.png",
             };
           });

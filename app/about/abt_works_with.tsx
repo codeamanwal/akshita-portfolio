@@ -189,7 +189,7 @@ export default function WorksWith() {
 
   const imgUrl = (idx: number) => {
     const url = images?.[idx]?.image?.url;
-    return url ? `${STRAPI_URL}${url}` : "/placeholder.png";
+    return url ? `${url}` : "/placeholder.png";
   };
 
   const imgAlt = (idx: number) =>
@@ -215,7 +215,7 @@ export default function WorksWith() {
 
             <div>
               <p className="text-[9px] lg:text-base font-normal tracking-[4px] leading-4 lg:leading-7 uppercase text-[#51331B] mb-10 lg:mb-8 mt-10 lg:mt-8">
-              AEarly-stage, high-intent consumer brands. Pre-Seed to Series A.
+              Early-stage, high-intent consumer brands. Pre-Seed to Series A.
               </p>
 
               <div className="text-base lg:text-xl text-[#C8AD88] font-domine leading-7 lg:leading-8 tracking-tight space-y-2">

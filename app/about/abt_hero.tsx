@@ -72,12 +72,11 @@ export default function HeroSection() {
         {/* Center Text */}
         <div className="flex flex-col items-center text-center">
           <h1 className="text-[32px] font-domine text-[#9F8267]">
-            design<span className="font-sans"> /details </span>that<br />
-            feel like magic
+          No fluff. Just<span className="font-sans"> /brands </span>
+          that actually land.
           </h1>
           <p className="mt-4 text-sm text-[#51331B] max-w-[310px] leading-6">
-            Passionate about fair creative practices and building a strong design community.
-            I’m here to make brands look good and mean something.
+          Over the years, I’ve worked with founders across categories to build brands with depth, direction, and taste. The kind that feel right on day one - and hold strong in the fluid market.
           </p>
 
         </div>

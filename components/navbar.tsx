@@ -9,7 +9,7 @@ import Image from "next/image";
 const navLinks = [
     { name: "/work", href: "/work" },
     { name: "/about", href: "/about" },
-    { name: "/play", href: "/play" },
+    { name: "/shelf", href: "/play" },
     { name: "/journal", href: "/journals" }
 ];
 

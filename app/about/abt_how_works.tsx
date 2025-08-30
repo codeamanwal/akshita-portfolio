@@ -59,7 +59,7 @@ export default function AbtWorksWith() {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
                       <p className="text-[#FEFCE4] leading-6 lg:leading-7 tracking-[-0.31px] lg:tracking-tighter text-sm lg:text-base pr-16">
-                      Every project starts with clarity - on the audience, the market, and <br/>the gaps worth owning. Design decisions are rooted in brand <br/>strategy, not just aesthetics.
+                      Every project starts with clarity - on the audience, the market, and <br class="br-desktop">the gaps worth owning. Design decisions are rooted in brand <br class="br-desktop"/>strategy, not just aesthetics.
                       </p>
                     </motion.div>
                   )}
@@ -94,7 +94,7 @@ export default function AbtWorksWith() {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
                       <p className="text-[#FEFCE4] leading-6 lg:leading-7 tracking-[-0.31px] lg:tracking-tighter text-sm lg:text-base pr-16">
-                      When a brand knows what it stands for, it shows. This kind <br/>of alignment builds trust, recognition, and conversion—faster.
+                      When a brand knows what it stands for, it shows. This kind <br class="br-desktop"/>of alignment builds trust, recognition, and conversion—faster.
                       </p>
                     </motion.div>
                   )}
@@ -128,7 +128,7 @@ export default function AbtWorksWith() {
                       transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
                       <p className="text-[#FEFCE4] leading-6 lg:leading-7 tracking-[-0.31px] lg:tracking-tighter text-sm lg:text-base pr-16">
-                      A research-informed, narrative-first approach that positions your<br/> brand to lead  - not just compete.
+                      A research-informed, narrative-first approach that positions your<br class="br-desktop"/> brand to lead  - not just compete.
                       </p>
                     </motion.div>
                   )}

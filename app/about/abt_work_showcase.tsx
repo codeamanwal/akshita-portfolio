@@ -77,7 +77,7 @@ export default function WorkShowcase() {
             [i.line1, i.line2, i.line3].filter(Boolean)
           ) || [],
           cardImage: entry.cardImage
-            ? "http://localhost:1337" + entry.cardImage.url
+            ? entry.cardImage.url
             : null
         }));
 

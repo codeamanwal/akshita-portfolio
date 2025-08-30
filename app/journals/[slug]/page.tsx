@@ -45,7 +45,7 @@ export default async function JournalDetailPage(props: { params: Promise<PagePar
           <div className="w-full h-[406px] md:h-[495px] mb-8 rounded-none bg-[#C8C8D0] flex items-center justify-center">
             {coverImage?.[0]?.url && (
               <img
-                src={`${process.env.NEXT_PUBLIC_STRAPI_URL}${coverImage[0].url}`}
+                src={`${coverImage[0].url}`}
                 alt={coverImage[0].alternativeText || Title}
                 className="w-full h-full object-cover"
               />
