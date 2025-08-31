@@ -23,6 +23,11 @@ const nextConfig: NextConfig = {
         hostname: 'portfolio-cms-a0hn.onrender.com', // 👈 your Render backend
         pathname: '/uploads/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**', // 👈 allow all Cloudinary image paths
+      },
       // Add production domain after deployment to Render
       // {
       //   protocol: 'https',

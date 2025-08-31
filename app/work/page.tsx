@@ -348,6 +348,7 @@ export default function WorkPage() {
             };
           });
 
+
           setProjects(mapped);
         }
       } catch (err) {
@@ -437,7 +438,7 @@ export default function WorkPage() {
                   {filteredProjects.map((project) => (
                     <Link
                       key={project.id}
-                      href={`/work/${project.slug}`}
+                      href={`/work/${project.id}`}
                       className="group cursor-pointer"
                     >
                       <div className="relative overflow-hidden rounded-lg bg-white transition-all duration-300">

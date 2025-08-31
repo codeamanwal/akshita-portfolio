@@ -38,30 +38,31 @@ const LetsBuildBold = () => {
         </p>
 
         {/* Heading */}
-        <div className="relative">
-          <h2 className="text-[1.5rem] xs:text-[1.8rem] sm:text-[2rem]  md:text-[2.8rem] lg:text-[3.2rem] xl:text-[3.6rem] text-[#51331B] font-serif  leading-[1.1] sm:leading-tight md:-mr-23">
-            <span className="font-sans">Let’s play the /brand<br/> cards right
-            </span>
-          </h2>
+                      <div className="relative flex flex-col items-center justify-center">
+                <h2 className="text-center mx-auto text-[1.5rem] xs:text-[1.8rem] sm:text-[2rem] md:text-[2.8rem] lg:text-[3.2rem] xl:text-[3.6rem] text-[#51331B] font-serif leading-[1.1] sm:leading-tight">
+                  <span className="font-sans">
+                    Let’s play the /brand <br /> cards right
+                  </span>
+                </h2>
 
-          {/* Stamp positioned relative to heading/main content, adjusted for responsiveness */}
-          <div
-            className="absolute z-20"
-            style={{
-              bottom: "-25%", // Adjust based on visual
-              right: "-52%", // Adjust based on visual
-              width: "min(40%, 222px)", // Responsive width, max 120px
-            }}
-          >
-            <Image
-              src="/stamp.png"
-              alt="stamp"
-              width={600}
-              height={500}
-              className="w-full h-auto object-contain"
-            />
-          </div>
-        </div>
+                {/* Stamp stays visually attached without breaking alignment */}
+                <div
+                  className="absolute z-20"
+                  style={{
+                    bottom: "-25%", // tweak if needed
+                    right: "-52%", // tweak if needed
+                    width: "min(40%, 222px)",
+                  }}
+                >
+                  <Image
+                    src="/stamp.png"
+                    alt="stamp"
+                    width={600}
+                    height={500}
+                    className="w-full h-auto object-contain"
+                  />
+                </div>
+              </div>
 
         {/* Button */}
         <div className="relative inline-block mt-12 md:mt-8">

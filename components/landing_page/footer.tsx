@@ -55,15 +55,15 @@ const HeroBanner = () => {
               /journal
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2C2216] transition-all duration-300 group-hover:w-full"></span>
             </Link>
-            <a href="#" target="_blank" rel="noopener noreferrer" className="relative group transition-all duration-300 hover:text-[#2C2216]">
+            <a href="https://www.linkedin.com/in/akshita-ag/" target="_blank" rel="noopener noreferrer" className="relative group transition-all duration-300 hover:text-[#2C2216]">
               /linkedin
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2C2216] transition-all duration-300 group-hover:w-full"></span>
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" className="relative group transition-all duration-300 hover:text-[#2C2216]">
+            <a href="https://www.instagram.com/akshita.design/" target="_blank" rel="noopener noreferrer" className="relative group transition-all duration-300 hover:text-[#2C2216]">
               /instagram
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2C2216] transition-all duration-300 group-hover:w-full"></span>
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" className="relative group transition-all duration-300 hover:text-[#2C2216]">
+            <a href="https://www.behance.net/akshitaagarwal1" target="_blank" rel="noopener noreferrer" className="relative group transition-all duration-300 hover:text-[#2C2216]">
               /behance
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2C2216] transition-all duration-300 group-hover:w-full"></span>
             </a>

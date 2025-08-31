@@ -22,7 +22,6 @@
 //     outcome: string;
 //   };
 // }
-
 import { notFound } from 'next/navigation';
 import { fetchFromStrapi, getStrapiMedia } from '@/lib/strapi';
 import ProjectDetailClient, { ProjectData } from './ProjectDetailClient';
