@@ -9,6 +9,9 @@
 
 import type { NextConfig } from 'next';
 
+const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "";
+const strapiHostname = strapiUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
+
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
@@ -20,7 +23,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'portfolio-cms-a0hn.onrender.com', // 👈 your Render backend
+        hostname: strapiHostname, // 👈 your Render backend
         pathname: '/uploads/**',
       },
       {
