@@ -141,7 +141,7 @@ export default function WorkShowcase() {
   if (!foldersData.length) return null;
 
   return (
-    <div className="relative h-[450px] lg:h-[300vh]">
+    <div className="relative h-[450px] lg:h-[200vh]">
       {/* Mobile Layout */}
       {isMobile ? (
         <div 
@@ -224,7 +224,7 @@ export default function WorkShowcase() {
         </div>
       ) : (
         /* Desktop Layout */
-        <section ref={sectionRef} className="relative h-[300vh]">
+        <section ref={sectionRef} className="relative h-[200vh]">
           <div className="sticky top-0 h-screen z-10 flex items-center justify-center">
             <div 
               className="absolute inset-0 opacity-100"

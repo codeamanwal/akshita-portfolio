@@ -295,7 +295,6 @@
 //     </>
 //     );
 // }
-
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
@@ -311,7 +310,15 @@ interface Project {
   size: "small" | "medium" | "large" | "full";
   slug: string;
 }
+
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+
+const sizeMap: Record<Project["size"], { w: number; h: number }> = {
+  small: { w: 504, h: 539 },
+  medium: { w: 664, h: 539 },
+  large: { w: 818, h: 539 },
+  full: { w: 1346, h: 639 },
+};
 
 export default function WorkPage() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -337,8 +344,7 @@ export default function WorkPage() {
               slug: attrs.slug,
               name: attrs.name,
               oneLiner: attrs.oneLiner,
-              size: attrs.size || "small", 
-              // normalize tags into array
+              size: attrs.size || "small",
               tags: attrs.tags
                 ? attrs.tags.split(",").map((t: string) => t.trim().toLowerCase())
                 : [],
@@ -347,7 +353,6 @@ export default function WorkPage() {
                 : "/placeholder.png",
             };
           });
-
 
           setProjects(mapped);
         }
@@ -395,83 +400,73 @@ export default function WorkPage() {
         </div>
 
         {/* Desktop Projects Grid */}
-        <div className="max-w-7xl mx-auto pb-20 justify-center hidden md:flex">
-          <div className="flex flex-col gap-6">
-            {loading ? (
-              <p className="text-center text-[#51331B]">Loading...</p>
-            ) : filteredProjects.length > 0 ? (
-              activeFilter === "all" ? (
-                <>
-                  {/* For ALL filter, show in original custom layout */}
-                  {filteredProjects.map((project) => (
-                    <div key={project.id} className="pb-10">
-                      <Link
-                        href={`/work/${project.slug}`}
-                        className="group cursor-pointer"
-                      >
-                        <div className="relative overflow-hidden rounded-lg bg-white transition-all duration-300">
-                          <div className="overflow-hidden">
-                            <Image
-                              src={project.image}
-                              alt={project.name}
-                              width={1000}
-                              height={600}
-                              className="object-cover transition-transform duration-500 group-hover:scale-105"
-                            />
-                          </div>
-                        </div>
-                        <div className="pt-4 pb-2">
-                          <h3 className="text-[32px] font-semibold text-[#51331B] mb-1">
-                            {project.name}
-                          </h3>
-                          <p className="text-base text-[#51331B]">
-                            {project.oneLiner}
-                          </p>
-                        </div>
-                      </Link>
-                    </div>
-                  ))}
-                </>
-              ) : (
-                // For filtered results, simple grid
-                <div className="grid grid-cols-2 gap-6">
-                  {filteredProjects.map((project) => (
-                    <Link
-                      key={project.id}
-                      href={`/work/${project.id}`}
-                      className="group cursor-pointer"
+        <div className="max-w-7xl mx-auto pb-20 hidden md:flex flex-col gap-12">
+          {loading ? (
+            <p className="text-center text-[#51331B]">Loading...</p>
+          ) : filteredProjects.length > 0 ? (
+            (() => {
+              const rows: React.ReactNode[][] = [];
+              let currentRow: React.ReactNode[] = [];
+
+              filteredProjects.forEach((p) => {
+                const { w, h } = sizeMap[p.size];
+
+                const projectEl = (
+                  <Link
+                    key={p.id}
+                    href={`/work/${p.slug}`}
+                    className="group cursor-pointer"
+                  >
+                    <div
+                      className="relative bg-white overflow-hidden rounded-lg"
+                      style={{ width: w, height: h }}
                     >
-                      <div className="relative overflow-hidden rounded-lg bg-white transition-all duration-300">
-                        <div className="overflow-hidden">
-                          <Image
-                            src={project.image}
-                            alt={project.name}
-                            width={664}
-                            height={539}
-                            className="w-[664px] h-[539px] object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                        </div>
-                      </div>
-                      <div className="pt-4 pb-2">
-                        <h3 className="text-[32px] font-semibold text-[#51331B] mb-1">
-                          {project.name}
-                        </h3>
-                        <p className="text-base text-[#51331B]">
-                          {project.oneLiner}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
+                      <Image
+                        src={p.image}
+                        alt={p.name}
+                        fill
+                        className="object-fill transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="pt-4 pb-2" style={{ width: w }}>
+                      <h3 className="text-[32px] font-semibold text-[#51331B] mb-1">
+                        {p.name}
+                      </h3>
+                      <p className="text-base text-[#51331B]">{p.oneLiner}</p>
+                    </div>
+                  </Link>
+                );
+
+                if (p.size === "full") {
+                  if (currentRow.length > 0) {
+                    rows.push(currentRow);
+                    currentRow = [];
+                  }
+                  rows.push([projectEl]);
+                } else {
+                  currentRow.push(projectEl);
+                  if (currentRow.length === 2) {
+                    rows.push(currentRow);
+                    currentRow = [];
+                  }
+                }
+              });
+
+              if (currentRow.length > 0) rows.push(currentRow);
+
+              return rows.map((row, i) => (
+                <div key={i} className="flex gap-6 justify-center">
+                  {row}
                 </div>
-              )
-            ) : (
-              <div className="text-center py-20">
-                <p className="text-xl text-[#51331B]">
-                  No projects found for this category.
-                </p>
-              </div>
-            )}
-          </div>
+              ));
+            })()
+          ) : (
+            <div className="text-center py-20">
+              <p className="text-xl text-[#51331B]">
+                No projects found for this category.
+              </p>
+            </div>
+          )}
         </div>
 
         {/* Mobile Projects Grid */}
@@ -480,33 +475,36 @@ export default function WorkPage() {
             {loading ? (
               <p className="text-center text-[#51331B]">Loading...</p>
             ) : filteredProjects.length > 0 ? (
-              filteredProjects.map((project) => (
-                <Link
-                  key={project.id}
-                  href={`/work/${project.slug}`}
-                  className="group cursor-pointer"
-                >
-                  <div className="relative overflow-hidden rounded-lg bg-white transition-all duration-300">
-                    <div className="overflow-hidden">
+              filteredProjects.map((p) => {
+                const { w, h } = sizeMap[p.size];
+                return (
+                  <Link
+                    key={p.id}
+                    href={`/work/${p.slug}`}
+                    className="group cursor-pointer"
+                  >
+                    <div
+                      className="relative bg-white overflow-hidden rounded-lg"
+                      style={{ width: "100%", height: 407 }}
+                    >
                       <Image
-                        src={project.image}
-                        alt={project.name}
-                        width={320}
-                        height={240}
-                        className="w-full h-[407px] object-cover transition-transform duration-500 group-hover:scale-105"
+                        src={p.image}
+                        alt={p.name}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
-                  </div>
-                  <div className="pt-4 pb-10">
-                    <h3 className="text-2xl font-semibold text-[#51331B] mb-1">
-                      {project.name}
-                    </h3>
-                    <p className="text-sm tracking-[-0.4px] leading-[28px] text-[#51331B]">
-                      {project.oneLiner}
-                    </p>
-                  </div>
-                </Link>
-              ))
+                    <div className="pt-4 pb-10">
+                      <h3 className="text-2xl font-semibold text-[#51331B] mb-1">
+                        {p.name}
+                      </h3>
+                      <p className="text-sm tracking-[-0.4px] leading-[28px] text-[#51331B]">
+                        {p.oneLiner}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })
             ) : (
               <div className="text-center py-20">
                 <p className="text-xl text-[#51331B]">

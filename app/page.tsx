@@ -11,6 +11,7 @@ import SwipeCards from "@/components/landing_page/testimonials";
 import Header from "@/components/landing_page/header";
 import FeaturedWork from "@/components/landing_page/cards/FeaturedWork.server";
 import HorizontalScrollServer from "@/components/landing_page/HorizontalScroll.server";
+import Showreel from "../components/landing_page/showreel";
 
 export default function Home() {
   return (
@@ -33,9 +34,10 @@ export default function Home() {
           <ScrollCarousel />
         </div>
         {/* <Video/> */}
-        <div className="">
+        {/* <div className="">
           <Image src="/gif4x.png" alt="gif" width={1550} height={750} className="w-full"></Image>
-        </div>
+        </div> */}
+        <Showreel />
       </div>
       <div className="">
         <HorizontalScrollServer />
@@ -43,10 +45,6 @@ export default function Home() {
       <SwipeCards />
       <InstagramFeed />
       <LetsBuildBold />
-      {/* <FeaturedProjects /> */}
-      {/* <ProjectDetails />
-      <Testimonials />
-      <Blogs /> */}
     </>
   );
 }

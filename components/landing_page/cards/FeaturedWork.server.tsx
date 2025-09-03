@@ -2,7 +2,7 @@ import { fetchFromStrapi, getStrapiMedia } from "@/lib/strapi";
 import FeaturedWorkStack from "./stack";
 
 export default async function FeaturedWork() {
-  const res = await fetchFromStrapi("/api/featured-projects?populate=*");
+  const res = await fetchFromStrapi("/api/featured-projects?populate=*&sort[0]=order:asc");
 
   const items = Array.isArray(res?.data) ? res.data : [];
 

@@ -9,7 +9,7 @@ import Image from "next/image";
 const navLinks = [
   { name: "/work", href: "/work" },
   { name: "/about", href: "/about" },
-  { name: "/play", href: "/play" },
+  { name: "/shelf", href: "/play" },
   { name: "/journal", href: "/journals" }
 ];
 
@@ -25,7 +25,7 @@ export default function Header() {
 
   const logoScale = useTransform(scrollY, animationRange, ["7vw", 2]);
 
-  const navOpacity = useTransform(scrollY, [300, 400], [0, 1]);
+  const navOpacity = useTransform(scrollY, [300, 800], [0, 1]);
 
   // Track scroll direction
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function Header() {
 
   // Calculate header visibility based on scroll direction
   const headerY = useTransform(scrollY, (value) => {
-    return scrollDirection === "down" && value > 400 ? -100 : 0;
+    return scrollDirection === "down" && value > 1200 ? -100 : 0;
   });
 
   return (

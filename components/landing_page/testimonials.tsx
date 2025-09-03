@@ -139,13 +139,13 @@ type Testimonial = {
 
 export default function Testimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [current, setCurrent] = useState(1);
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/testimonials`
+          `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/testimonials?sort=number:asc`
         );
         const data = await res.json();
 
@@ -206,7 +206,7 @@ export default function Testimonials() {
 
         <div className="relative h-[545px] w-full flex items-center justify-center">
           {testimonials.map((t, i) => {
-            const position = (i - current + testimonials.length) % testimonials.length;
+            const position = (i - current + 1 + testimonials.length) % testimonials.length;
 
             const styles: { [key: number]: string } = {
               0: "rotate-[-6deg] -translate-x-[60%] z-0",
@@ -275,7 +275,7 @@ export default function Testimonials() {
 
         <div className="relative h-[420px] w-[90vw] max-w-[340px] flex items-center justify-center overflow-visible">
           {testimonials.map((t, i) => {
-            const position = (i - current + testimonials.length) % testimonials.length;
+            const position = (i - current - 1 + testimonials.length) % testimonials.length;
 
             const styles: { [key: number]: string } = {
               0: "rotate-[0deg] -translate-y-[120px] scale-[0.95] z-0",

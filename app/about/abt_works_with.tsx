@@ -265,8 +265,8 @@ export default function WorksWith() {
               <div className="bg-[#E9DAB6] p-1 lg:p-4 shadow-lg w-full h-full">
                 <div className="w-full h-full bg-gray-100 overflow-hidden">
                   <Image
-                    src={imgUrl(1)}
-                    alt={imgAlt(1)}
+                    src={imgUrl(2)}
+                    alt={imgAlt(2)}
                     width={274}
                     height={417}
                     className="object-cover w-full h-full"
@@ -280,8 +280,8 @@ export default function WorksWith() {
               <div className="bg-[#E9DAB6] p-1 lg:p-4 shadow-lg w-full h-full">
                 <div className="w-full h-full bg-gray-100 overflow-hidden">
                   <Image
-                    src={imgUrl(2)}
-                    alt={imgAlt(2)}
+                    src={imgUrl(3)}
+                    alt={imgAlt(3)}
                     width={274}
                     height={417}
                     className="object-cover w-full h-full"
@@ -295,8 +295,8 @@ export default function WorksWith() {
               <div className="bg-[#E9DAB6] p-4 shadow-lg w-full h-full">
                 <div className="w-full h-full bg-gradient-to-br overflow-hidden">
                 <Image
-                    src={imgUrl(2)}
-                    alt={imgAlt(2)}
+                    src={imgUrl(5)}
+                    alt={imgAlt(5)}
                     width={274}
                     height={417}
                     className="object-cover w-full h-full"
@@ -310,8 +310,8 @@ export default function WorksWith() {
               <div className="bg-[#E9DAB6] p-1 lg:p-4 shadow-lg w-full h-full">
                 <div className="w-full h-full bg-gradient-to-br overflow-hidden">
                 <Image
-                    src={imgUrl(2)}
-                    alt={imgAlt(2)}
+                    src={imgUrl(1)}
+                    alt={imgAlt(1)}
                     width={274}
                     height={417}
                     className="object-cover w-full h-full"
@@ -325,8 +325,8 @@ export default function WorksWith() {
               <div className="bg-[#E9DAB6] p-4 shadow-lg w-full h-full">
                 <div className="w-full h-full bg-gray-100 overflow-hidden">
                   <Image
-                    src={imgUrl(3)}
-                    alt={imgAlt(3)}
+                    src={imgUrl(4)}
+                    alt={imgAlt(4)}
                     width={274}
                     height={417}
                     className="object-cover w-full h-full"

@@ -10,7 +10,7 @@ export default function ProductCard({
   index,
   totalProducts,
 }: {
-  product: { id: number; name: string; images: string[]; isLaunching?: boolean }
+  product: { id: number; name: string; images: string[]; isLaunching?: boolean; Product_Link?: string; }
   index: number
   totalProducts: number
 }) {
@@ -76,14 +76,15 @@ export default function ProductCard({
           />
         ))}
       </div>
-
       <div className="pt-4">
-        <button className="overflow-hidden inline-flex justify-center gap-2 lg:gap-4 items-center h-[40px] px-6 py-2 border border-[#51331B] text-[#51331B] active:bg-[#51331B] active:text-white lg:hover:bg-[#51331B] lg:hover:text-white cursor-pointer transition-colors duration-200 group mt-8 lg:w-auto lg:h-[50px] lg:px-8 lg:py-3">
+        <a href={product.Product_Link || "#"}
+          target="_blank"
+          rel="noopener noreferrer" className="overflow-hidden inline-flex justify-center gap-2 lg:gap-4 items-center h-[40px] px-6 py-2 border border-[#51331B] text-[#51331B] active:bg-[#51331B] active:text-white lg:hover:bg-[#51331B] lg:hover:text-white cursor-pointer transition-colors duration-200 group mt-8 lg:w-auto lg:h-[50px] lg:px-8 lg:py-3">
           <span className="text-base lg:text-xl leading-6 lg:leading-7 tracking-tight">
             {product.name}
           </span>
           <ArrowUpRight className="w-4 h-4 lg:w-5 lg:h-5 group-active:translate-x-1 group-active:-translate-y-1 lg:group-hover:translate-x-1 lg:group-hover:-translate-y-1 transition-transform duration-200" />
-        </button>
+        </a>
       </div>
     </div>
   )

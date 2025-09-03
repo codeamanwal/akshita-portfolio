@@ -283,6 +283,7 @@ export default async function PlayPage() {
         name: product?.name ?? "Untitled Product",
         images: productImages,
         isLaunching: product?.isLaunching ?? false,
+        Product_Link: product?.Product_Link || "#", // NEW: added link from Strapi
       }}
       index={index}
       totalProducts={products.length}

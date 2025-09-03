@@ -2,7 +2,9 @@
 
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { fetchFromStrapi, getStrapiMedia } from "@/lib/strapi";
+
 
 export default function HeroSection() {
     const ref = useRef(null);
@@ -12,6 +14,23 @@ export default function HeroSection() {
     });
     
     const rotate = useTransform(scrollYProgress, [0, 1], [0, 360]);
+
+    // State for portrait URL
+  const [portraitUrl, setPortraitUrl] = useState<string | null>(null);
+
+  // Fetch portrait image from Strapi
+  useEffect(() => {
+    async function getPortrait() {
+      try {
+        const data = await fetchFromStrapi("/api/about-page-portrait?populate=*");
+        const url = data?.data?.Portrait_Image?.formats?.small?.url || data?.data?.Portrait_Image?.url;
+        if (url) setPortraitUrl(getStrapiMedia(url));
+      } catch (err) {
+        console.error("Failed to fetch portrait:", err);
+      }
+    }
+    getPortrait();
+  }, []);
 
     return (
         <section ref={ref} className="w-full h-auto min-[1400px]:h-screen text-white">
@@ -76,13 +95,15 @@ export default function HeroSection() {
                 </motion.div>
 
                 <div className="flex-[0.7] relative bg-[#40352F] flex items-center justify-center overflow-hidden">
-                    <Image
-                        src="/women_portrait.png"
+                {portraitUrl && (
+                        <Image
+                        src={portraitUrl}
                         alt="woman"
                         width={700}
-                        height={904} 
+                        height={904}
                         className="object-cover h-full absolute left-0"
-                    />
+                        />
+                    )}
                 </div>
             </div>
 
@@ -149,16 +170,18 @@ export default function HeroSection() {
                 {/* Image Section - Full width, no padding, within section boundaries */}
                 <div className="relative w-full h-[75vh] sm:h-[90vh] md:h-[100vh] lg:h-[60vh] bg-[#40352F] overflow-hidden">
                     {/* Women portrait image - positioned towards bottom right like in reference */}
-                    <div className="absolute inset-0 flex">
-                        <Image
-                            src="/women_portrait.png"
-                            alt="woman"
-                            width={400}
-                            height={418}
-                            className="object-cover h-full w-full"
-                            priority
-                        />
-                    </div>
+                    {portraitUrl && (
+            <div className="absolute inset-0 flex">
+              <Image
+                src={portraitUrl}
+                alt="woman"
+                width={400}
+                height={418}
+                className="object-cover h-full w-full"
+                priority
+              />
+            </div>
+          )}
                 </div>
             </div>
             

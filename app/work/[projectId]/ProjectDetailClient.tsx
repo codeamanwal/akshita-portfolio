@@ -289,12 +289,12 @@ export function ProjectDetailClient({ project }: { project: ProjectData }) {
                       className="w-full h-[400px] lg:h-full object-cover"
                     />
                     {/* Text Overlay */}
-                    <div className="absolute bottom-4 lg:bottom-8 left-4 lg:left-8 right-4 lg:right-8">
+                    {/* <div className="absolute bottom-4 lg:bottom-8 left-4 lg:left-8 right-4 lg:right-8">
                       <div className="bg-green-600 text-white p-4 lg:p-6 rounded-lg">
                         <h3 className="text-lg lg:text-2xl font-bold mb-1 lg:mb-2">CRAVE THE CRUNCH</h3>
                         <h4 className="text-base lg:text-xl">LOVE THE protein!</h4>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               )}

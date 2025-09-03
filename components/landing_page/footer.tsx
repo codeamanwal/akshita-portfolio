@@ -34,7 +34,7 @@ const HeroBanner = () => {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2C2216] transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <Link href="/play" className="relative group transition-all duration-300 hover:text-[#2C2216]">
-              /play
+              /shelf
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#2C2216] transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <Link href="/about" className="relative group transition-all duration-300 hover:text-[#2C2216]">

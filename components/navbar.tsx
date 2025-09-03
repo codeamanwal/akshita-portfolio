@@ -35,7 +35,7 @@ export default function Navbar() {
 
     // Calculate navbar visibility based on scroll direction
     const navbarY = useTransform(scrollY, (value) => {
-        return scrollDirection === "down" && value > 200 ? -100 : 0;
+        return scrollDirection === "down" && value > 1200 ? -100 : 0;
     });
     
     return (
