@@ -250,81 +250,152 @@ export function ProjectDetailClient({ project }: { project: ProjectData }) {
             </motion.div>
 
             {/* Bottom Row - Mixed Layout */}
-            <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 text-[#51331B]">
-              {/* Left Side - Two Stacked Images */}
-              <div className="flex flex-col gap-4 lg:gap-6 w-full lg:w-1/2 text-[#51331B]">
-                {project.images.gallery[0] && (
-                  <div className="relative overflow-hidden rounded-lg bg-white">
-                    <Image
-                      src={project.images.gallery[0]}
-                      alt="Product detail 1"
-                      width={664}
-                      height={400}
-                      className="w-full h-[250px] md:h-[300px] lg:h-[400px] object-cover"
-                    />
-                  </div>
-                )}
-                {project.images.gallery[1] && (
-                  <div className="relative overflow-hidden rounded-lg bg-white">
-                    <Image
-                      src={project.images.gallery[1]}
-                      alt="Product detail 2"
-                      width={664}
-                      height={400}
-                      className="w-full h-[250px] md:h-[300px] lg:h-[400px] object-cover"
-                    />
-                  </div>
-                )}
+            {/* Remaining Images */}
+{project.images.gallery.slice(3).length > 0 && (
+  <div className="flex flex-col gap-6">
+    {(() => {
+      const remaining = project.images.gallery.slice(3);
+
+      // Case 1: less than 3
+      if (remaining.length < 3) {
+        return (
+          <div className="flex flex-col md:flex-row gap-4 lg:gap-6">
+            {remaining.map((img, idx) => (
+              <div
+                key={idx}
+                className="flex-1 relative overflow-hidden rounded-lg bg-white"
+              >
+                <Image
+                  src={img}
+                  alt={`Gallery image ${idx + 4}`}
+                  width={664}
+                  height={400}
+                  className="w-full h-[250px] md:h-[400px] object-cover"
+                />
               </div>
+            ))}
+          </div>
+        );
+      }
 
-              {/* Right Side - Large Image with Text Overlay */}
-              {project.images.gallery[2] && (
-                <div className="w-full lg:w-1/2 relative">
-                  <div className="relative overflow-hidden rounded-lg bg-white h-full">
+      // Case 2: exactly 3
+      if (remaining.length === 3) {
+        return (
+          <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 text-[#51331B]">
+            {/* Left Side - Two stacked */}
+            <div className="flex flex-col gap-4 lg:gap-6 w-full lg:w-1/2">
+              <div className="relative overflow-hidden rounded-lg bg-white">
+                <Image
+                  src={remaining[0]}
+                  alt="Gallery image 4"
+                  width={664}
+                  height={400}
+                  className="w-full h-[250px] md:h-[300px] lg:h-[400px] object-cover"
+                />
+              </div>
+              <div className="relative overflow-hidden rounded-lg bg-white">
+                <Image
+                  src={remaining[1]}
+                  alt="Gallery image 5"
+                  width={664}
+                  height={400}
+                  className="w-full h-[250px] md:h-[300px] lg:h-[400px] object-cover"
+                />
+              </div>
+            </div>
+            {/* Right Side - One large */}
+            <div className="w-full lg:w-1/2 relative">
+              <div className="relative overflow-hidden rounded-lg bg-white h-full">
+                <Image
+                  src={remaining[2]}
+                  alt="Gallery image 6"
+                  width={664}
+                  height={816}
+                  className="w-full h-[400px] lg:h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // Case 3: more than 3
+      return (
+        <>
+          {/* First 3 with old layout */}
+          <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 text-[#51331B]">
+            <div className="flex flex-col gap-4 lg:gap-6 w-full lg:w-1/2">
+              <div className="relative overflow-hidden rounded-lg bg-white">
+                <Image
+                  src={remaining[0]}
+                  alt="Gallery image 4"
+                  width={664}
+                  height={400}
+                  className="w-full h-[250px] md:h-[300px] lg:h-[400px] object-cover"
+                />
+              </div>
+              <div className="relative overflow-hidden rounded-lg bg-white">
+                <Image
+                  src={remaining[1]}
+                  alt="Gallery image 5"
+                  width={664}
+                  height={400}
+                  className="w-full h-[250px] md:h-[300px] lg:h-[400px] object-cover"
+                />
+              </div>
+            </div>
+            <div className="w-full lg:w-1/2 relative">
+              <div className="relative overflow-hidden rounded-lg bg-white h-full">
+                <Image
+                  src={remaining[2]}
+                  alt="Gallery image 6"
+                  width={664}
+                  height={816}
+                  className="w-full h-[400px] lg:h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Rest two per row */}
+          {remaining.slice(3).map((img, idx) => {
+            if (idx % 2 === 0) {
+              const nextImg = remaining.slice(3)[idx + 1];
+              return (
+                <div
+                  key={idx}
+                  className="flex flex-col md:flex-row gap-4 lg:gap-6"
+                >
+                  <div className="flex-1 relative overflow-hidden rounded-lg bg-white">
                     <Image
-                      src={project.images.gallery[2]}
-                      alt="Product showcase"
+                      src={img}
+                      alt={`Gallery image ${idx + 7}`}
                       width={664}
-                      height={816}
-                      className="w-full h-[400px] lg:h-full object-cover"
+                      height={400}
+                      className="w-full h-[250px] md:h-[400px] object-cover"
                     />
-                    {/* Text Overlay */}
-                    {/* <div className="absolute bottom-4 lg:bottom-8 left-4 lg:left-8 right-4 lg:right-8">
-                      <div className="bg-green-600 text-white p-4 lg:p-6 rounded-lg">
-                        <h3 className="text-lg lg:text-2xl font-bold mb-1 lg:mb-2">CRAVE THE CRUNCH</h3>
-                        <h4 className="text-base lg:text-xl">LOVE THE protein!</h4>
-                      </div>
-                    </div> */}
                   </div>
+                  {nextImg && (
+                    <div className="flex-1 relative overflow-hidden rounded-lg bg-white">
+                      <Image
+                        src={nextImg}
+                        alt={`Gallery image ${idx + 8}`}
+                        width={664}
+                        height={400}
+                        className="w-full h-[250px] md:h-[400px] object-cover"
+                      />
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-
-            {/* Final Row - Two More Images */}
-            <div className="flex flex-col md:flex-row gap-4 lg:gap-6">
-              {project.images.gallery[3] && (
-                <div className="flex-1 relative overflow-hidden rounded-lg bg-white">
-                  <Image
-                    src={project.images.gallery[3]}
-                    alt="Final showcase 1"
-                    width={664}
-                    height={539}
-                    className="w-full h-93 md:h-[400px] lg:h-[539px] object-cover"
-                  />
-                </div>
-              )}
-              {project.images.gallery[4] && (
-                <div className="flex-1 relative overflow-hidden rounded-lg bg-white">
-                  <Image
-                    src={project.images.gallery[4]}
-                    alt="Final showcase 2"
-                    width={664}
-                    height={539}
-                    className="w-full h-93 md:h-[400px] lg:h-[539px] object-cover"
-                  />
-                </div>
-              )}
-            </div>
+              );
+            }
+            return null;
+          })}
+        </>
+      );
+    })()}
+  </div>
+)}
           </div>
         </div>
       </div>
