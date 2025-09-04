@@ -76,7 +76,9 @@ export default function ContactForm() {
     formBody.append('entry.475787856', formData.fullName); // Full Name
     formBody.append('entry.1622469482', formData.phoneNo); // Phone No.
     formBody.append('entry.180372666', formData.emailId); // Email
-    formBody.append('entry.1897569207', formData.interests.join(', ')); // Interests
+    formData.interests.forEach(interest => {
+      formBody.append('entry.1897569207', interest);
+    });// Interests
     formBody.append('entry.1699600507', formData.message); // Message
 
     try {
