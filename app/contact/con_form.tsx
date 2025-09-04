@@ -28,8 +28,8 @@ export default function ContactForm() {
 
   useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto'; // Reset height to recalculate scrollHeight
-      textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px'; // Set height to scrollHeight
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
     }
   }, [formData.message]);
 
@@ -50,7 +50,9 @@ export default function ContactForm() {
     }));
   };
 
-  const APPSCRIPT_URL = "https://script.google.com/macros/s/AKfycbwg0jXEOL9d2FqrFinF05vFF7zjXtNtIbi-uq4ikBmZMCZK-K5YdaE7WDzaKz9mLizS/exec"; // Replace with your actual URL
+  // Google Form action URL
+  const GOOGLE_FORM_ACTION =
+    'https://docs.google.com/forms/d/e/1FAIpQLSeoqsFhn9MxD4D-j7Q1FpYdDg_gmpSV2ho5sdscPGdD9klRlw/formResponse';
 
   const validateForm = () => {
     const { fullName, phoneNo, emailId, interests, message } = formData;
@@ -69,32 +71,33 @@ export default function ContactForm() {
       alert('Please fill all fields and select at least one interest.');
       return;
     }
+
+    const formBody = new FormData();
+    formBody.append('entry.475787856', formData.fullName); // Full Name
+    formBody.append('entry.1622469482', formData.phoneNo); // Phone No.
+    formBody.append('entry.180372666', formData.emailId); // Email
+    formBody.append('entry.1897569207', formData.interests.join(', ')); // Interests
+    formBody.append('entry.1699600507', formData.message); // Message
+
     try {
-      const response = await fetch(APPSCRIPT_URL, {
-        redirect: "follow",
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
+      await fetch(GOOGLE_FORM_ACTION, {
+        method: 'POST',
+        body: formBody,
+        mode: 'no-cors', // Required for Google Forms
       });
-      if (response.ok) {
-        alert('Form submitted successfully!');
-        setFormData({
-          fullName: '',
-          phoneNo: '',
-          emailId: '',
-          interests: [],
-          message: ''
-        });
-      } else {
-        alert('Submission failed. Please try again later.');
-      }
+
+      alert('Form submitted successfully!');
+      setFormData({
+        fullName: '',
+        phoneNo: '',
+        emailId: '',
+        interests: [],
+        message: ''
+      });
     } catch {
-      alert('An error occurred. Please try again later.');
+      alert('Submission failed. Please try again later.');
     }
   };
-
 
   return (
     <div className="min-h-screen bg-[#40352F] flex flex-col lg:flex-row pt-8 lg:pt-24 pb-20 lg:pb-40 px-7 lg:px-0">
@@ -106,8 +109,6 @@ export default function ContactForm() {
             share a vision<span className="font-domine">, or <br />
             just say hello</span>
           </h1>
-          
-          {/* Envelope Illustration - Hidden on mobile */}
           <div className="relative mt-50 hidden lg:block">
             <Image
               src="/envelope.png"
@@ -125,54 +126,66 @@ export default function ContactForm() {
         <form onSubmit={handleSubmit} className="max-w-[700px] w-full">
           {/* Full Name */}
           <div className="mb-6">
-            <label className="block text-[#FEFCE4] text-sm lg:text-base mb-3 lg:mb-4">Full Name</label>
+            <label className="block text-[#FEFCE4] text-sm lg:text-base mb-3 lg:mb-4">
+              Full Name
+            </label>
             <input
               type="text"
               name="fullName"
               value={formData.fullName}
               onChange={handleInputChange}
-              placeholder=""
-              className="w-full text-lg lg:text-xl bg-transparent border-b border-[#FEFCE4] text-[#FEFCE4] placeholder-[#A0825A] pb-2 focus:outline-none focus:border-[#F5F1E8] transition-colors"
+              className="w-full text-lg lg:text-xl bg-transparent border-b border-[#FEFCE4] text-[#FEFCE4] pb-2 focus:outline-none focus:border-[#F5F1E8] transition-colors"
             />
           </div>
 
           {/* Phone and Email Row */}
           <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 lg:gap-18 mb-6 mt-12 lg:mt-18">
             <div>
-              <label className="block text-[#FEFCE4] text-sm lg:text-base mb-3 lg:mb-4">Phone No.</label>
+              <label className="block text-[#FEFCE4] text-sm lg:text-base mb-3 lg:mb-4">
+                Phone No.
+              </label>
               <input
                 type="tel"
                 name="phoneNo"
                 value={formData.phoneNo}
                 onChange={handleInputChange}
-                className="w-full text-lg lg:text-xl bg-transparent border-b border-[#FEFCE4] text-[#FEFCE4] placeholder-[#A0825A] pb-2 focus:outline-none focus:border-[#F5F1E8] transition-colors"
+                className="w-full text-lg lg:text-xl bg-transparent border-b border-[#FEFCE4] text-[#FEFCE4] pb-2 focus:outline-none focus:border-[#F5F1E8] transition-colors"
               />
             </div>
             <div className="mt-6 lg:mt-0">
-              <label className="block text-[#FEFCE4] text-sm lg:text-base mb-3 lg:mb-4">Email Id</label>
+              <label className="block text-[#FEFCE4] text-sm lg:text-base mb-3 lg:mb-4">
+                Email Id
+              </label>
               <input
                 type="email"
                 name="emailId"
                 value={formData.emailId}
                 onChange={handleInputChange}
-                className="w-full text-lg lg:text-xl bg-transparent border-b border-[#FEFCE4] text-[#FEFCE4] placeholder-[#A0825A] pb-2 focus:outline-none focus:border-[#F5F1E8] transition-colors"
+                className="w-full text-lg lg:text-xl bg-transparent border-b border-[#FEFCE4] text-[#FEFCE4] pb-2 focus:outline-none focus:border-[#F5F1E8] transition-colors"
               />
             </div>
           </div>
 
           {/* Interests Section */}
           <div className="mb-6 mt-12 lg:mt-18">
-            <label className="block text-[#FEFCE4] text-sm lg:text-base mb-4 lg:mb-6">What Are You Interested In</label>
+            <label className="block text-[#FEFCE4] text-sm lg:text-base mb-4 lg:mb-6">
+              What Are You Interested In
+            </label>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
-              {interestOptions.map((interest) => (
-                <label key={interest} className="flex items-center space-x-2 cursor-pointer">
+              {interestOptions.map(interest => (
+                <label
+                  key={interest}
+                  className="flex items-center space-x-2 cursor-pointer"
+                >
                   <input
                     type="checkbox"
                     checked={formData.interests.includes(interest)}
                     onChange={() => handleCheckboxChange(interest)}
                     className="w-5 h-5 lg:w-6 lg:h-6 appearance-none bg-transparent border border-[#FEFCE4] checked:appearance-auto accent-[#FEFCE4] checked:border-transparent"
                   />
-                  <span className="text-[#FEFCE4] text-sm lg:text-base">{interest}</span>
+                  <span className="text-[#FEFCE4] text-sm lg:text-base">
+                    {interest}
+                  </span>
                 </label>
               ))}
             </div>
@@ -180,14 +193,16 @@ export default function ContactForm() {
 
           {/* Message */}
           <div className="mb-6 mt-12 lg:mt-18">
-            <label className="block text-[#FEFCE4] text-sm lg:text-base mb-3 lg:mb-4">Message</label>
+            <label className="block text-[#FEFCE4] text-sm lg:text-base mb-3 lg:mb-4">
+              Message
+            </label>
             <textarea
               name="message"
               value={formData.message}
               onChange={handleInputChange}
               rows={2}
               ref={textareaRef}
-              className="w-full text-lg lg:text-xl bg-transparent border-b border-[#FEFCE4] text-[#FEFCE4] placeholder-[#A0825A] pb-2 resize-none focus:outline-none focus:border-[#F5F1E8] transition-colors"
+              className="w-full text-lg lg:text-xl bg-transparent border-b border-[#FEFCE4] text-[#FEFCE4] pb-2 resize-none focus:outline-none focus:border-[#F5F1E8] transition-colors"
             />
           </div>
 
@@ -196,20 +211,21 @@ export default function ContactForm() {
             type="submit"
             className="flex items-center space-x-2 mt-12 lg:mt-16 px-6 lg:px-8 py-3 border border-[#FEFCE4] text-[#FEFCE4] active:bg-[#FEFCE4] active:text-[#40352F] lg:hover:bg-[#FEFCE4] lg:hover:text-[#40352F] transition-colors duration-300 group"
           >
-            <span className='text-lg lg:text-xl'>submit</span>
+            <span className="text-lg lg:text-xl">submit</span>
             <ArrowUpRight className="w-5 h-5 group-active:translate-x-1 group-active:-translate-y-1 lg:group-hover:translate-x-1 lg:group-hover:-translate-y-1 transition-transform duration-200" />
           </button>
         </form>
-        {/* Envelope Illustration - Mobile View */}
-          <div className="relative mt-20 lg:mt-40 lg:hidden">
-            <Image
-              src="/envelope.png"
-              alt="Envelope"
-              width={351}
-              height={236}
-              className="object-contain"
-            />
-          </div>
+
+        {/* Mobile Envelope */}
+        <div className="relative mt-20 lg:mt-40 lg:hidden">
+          <Image
+            src="/envelope.png"
+            alt="Envelope"
+            width={351}
+            height={236}
+            className="object-contain"
+          />
+        </div>
       </div>
     </div>
   );
