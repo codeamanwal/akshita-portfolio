@@ -139,7 +139,7 @@ type Testimonial = {
 
 export default function Testimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(1);
 
   useEffect(() => {
     const fetchTestimonials = async () => {
@@ -206,7 +206,7 @@ export default function Testimonials() {
 
         <div className="relative h-[545px] w-full flex items-center justify-center">
           {testimonials.map((t, i) => {
-            const position = (i - current + 1 + testimonials.length) % testimonials.length;
+            const position = (i - current + 2 + testimonials.length) % testimonials.length;
 
             const styles: { [key: number]: string } = {
               0: "rotate-[-6deg] -translate-x-[60%] z-0",
@@ -261,9 +261,10 @@ export default function Testimonials() {
           className="text-white p-2 hover:scale-105 transition z-10 cursor-pointer"
         >
           <Image src="/arrowr.png" alt="slider" width={30} height={30} />
+          
         </button>
       </div>
-
+          
       {/* Mobile Layout */}
       <div className="relative flex flex-col items-center justify-center lg:hidden">
         <button
@@ -275,14 +276,20 @@ export default function Testimonials() {
 
         <div className="relative h-[420px] w-[90vw] max-w-[340px] flex items-center justify-center overflow-visible">
           {testimonials.map((t, i) => {
-            const position = (i - current - 1 + testimonials.length) % testimonials.length;
+
+            const position = (i - current + 2 + testimonials.length) % testimonials.length;
 
             const styles: { [key: number]: string } = {
-              0: "rotate-[0deg] -translate-y-[120px] scale-[0.95] z-0",
+              0: "rotate-[12deg] -translate-y-[90px] scale-[0.95] z-0",
               1: "rotate-0 translate-y-0 scale-100 z-10",
               2: "rotate-[-12deg] translate-y-[90px] scale-[0.95] z-0",
             };
 
+            // const styles: { [key: number]: string } = {
+            //   0: "rotate-[-6deg] -translate-x-[60%] z-0",
+            //   1: "rotate-0 z-20",
+            //   2: "rotate-[6deg] translate-x-[60%] z-0",
+            // };
             return (
               <div
                 key={t.id}

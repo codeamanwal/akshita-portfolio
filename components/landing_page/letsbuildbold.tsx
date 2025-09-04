@@ -30,10 +30,12 @@ const LetsBuildBold = () => {
             height={500}
             className="w-full h-auto object-contain"
           />
+
+          
         </div>
 
         {/* Label */}
-        <p className="uppercase tracking-[0.1em] sm:tracking-[0.15em] text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg text-[#51331B] mb-2 sm:mb-3 md:mb-4 md:-mr-23 ">
+        <p className="uppercase tracking-[0.1em] sm:tracking-[0.15em] text-[10px] xs:text-xs sm:text-sm md:text-base lg:text-lg text-[#51331B] mb-2 sm:mb-3 md:mb-4 md:-mr-23 ml-6 sm:ml-15 md:ml-0  ">
              Done with pretty-but-pointless?
         </p>
 
