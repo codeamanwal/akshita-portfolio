@@ -92,7 +92,7 @@ export default function AbtCoreValues() {
                                                 </div>
                                                 <div className="col-span-1"> {/* Content takes 1 column on mobile, 2 on desktop */}
                                                     <div className="relative pr-0 lg:pr-20 -ml-6 lg:-ml-28">
-                                                        <div className="absolute left-0 top-2 lg:top-3 w-px bg-[#51331B]" style={{ height: 'calc(100% - 1.25rem)' }}></div>
+                                                        <div className="absolute -left-[0.15rem] lg:left-0 top-5 sm:top-4 md:top-2 lg:top-4.5 xl:top-2 w-px bg-[#51331B] h-[85%] sm:h-[86%] md:h-[90%] lg:h-[calc(100%-2.5rem)] xl:h-[calc(100%-1.5rem)]"></div>
                                                         <div className="space-y-2 lg:space-y-4 ml-4 lg:ml-6 leading-6 lg:leading-7">
                                                             <div className="flex items-center">
                                                                 <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-[#51331B] rounded-full -ml-5 lg:-ml-7 mr-2 lg:mr-4 relative z-10"></div>
@@ -222,7 +222,7 @@ export default function AbtCoreValues() {
                                                 </div>
                                                 <div className="col-span-1"> {/* Content takes 1 column on mobile, 2 on desktop */}
                                                     <div className="relative pr-0 lg:pr-20 -ml-6 lg:-ml-28">
-                                                        <div className="absolute left-0 top-2 lg:top-3 w-px bg-[#51331B]" style={{ height: 'calc(100% - 1.25rem)' }}></div>
+                                                        <div className="absolute -left-[0.1rem] lg:left-0 top-2 lg:top-3 w-px bg-[#51331B] h-[87%] sm:h-[90%] md:h-[90%] lg:h-[calc(100%-1.25rem)]"></div>
                                                         <div className="space-y-2 lg:space-y-4 ml-4 lg:ml-6 leading-6 lg:leading-7">
                                                             <div className="flex items-center">
                                                                 <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-[#51331B] rounded-full -ml-5 lg:-ml-7 mr-2 lg:mr-4 relative z-10"></div>

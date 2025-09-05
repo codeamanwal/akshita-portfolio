@@ -77,7 +77,7 @@ const InstagramFeed = () => {
       return (
         <div
           key={item.id}
-          className="flex-shrink-0 w-1/5 aspect-square overflow-hidden"
+          className="flex-shrink-0 w-[37%] sm:w-1/3 md:w-1/5 aspect-square overflow-hidden"
         >
           {isImage && (
             <img

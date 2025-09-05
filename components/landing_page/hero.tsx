@@ -68,13 +68,19 @@ export default function Hero() {
         <Image src="/herolanding.webp" alt="hero" width={1108} height={674} className="md:-ml-5" />
       </div>
 
-      {/* Middle Image for mobile */}
-      <div
+      
+{/* Middle Image for mobile */}
+<div
         className="w-auto py-5 flex sm:hidden items-center justify-center text-[#2C2216] text-sm"
         ref={imageRef}
       >
-        <Image src="/herolanding.webp" alt="hero" width={482} height={523} />
-      </div>
+  <Image
+    src="/mobileHomeHero1.png"
+    alt="hero" width={462} height={523}
+    className="w-[100%] h-[61vh] object-cover"
+    priority
+  />
+</div>
 
       <div className="mt-8 flex flex-row items-start justify-between md:justify-center mx-4 md:mx-24">
   {/* Hero Content */}
