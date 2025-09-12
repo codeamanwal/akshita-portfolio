@@ -54,38 +54,38 @@ export default function RootLayout({
       <meta name="google-site-verification" content="google0cb3aff4c07362a2.html" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: `{
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "Person",
   "url": "https://www.akshitaagarwal.com",
   "name": "Akshita Agarwal",
   "department": [
     {
-      "@type": "Organization",
+      "@type": "Person",
       "name": "Contact",
       "url": "https://www.akshitaagarwal.com/contact"
     },
     {
-      "@type": "Organization",
+      "@type": "Person",
       "name": "About",
       "url": "https://www.akshitaagarwal.com/about"
     },
     {
-      "@type": "Organization",
+      "@type": "Person",
       "name": "Work",
       "url": "https://www.akshitaagarwal.com/work"
     },
     {
-      "@type": "Organization",
+      "@type": "Person",
       "name": "Play",
       "url": "https://www.akshitaagarwal.com/play"
     },
     {
-      "@type": "Organization",
+      "@type": "Person",
       "name": "Journals",
       "url": "https://www.akshitaagarwal.com/journals"
     }
   ]
 }` }} />
-      {/* <meta name="google-site-verification" content="s-1jfW3Ap-5oKqB-12GxnPYzR6yJVC7tBvlIMrmBU2c" /> */}
+      
       </head>
       <body className="font-dm-sans">
         <ThemeProvider
