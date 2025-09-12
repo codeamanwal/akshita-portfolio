@@ -59,7 +59,7 @@ export default function HeroSection() {
                             <div className="flex-grow"></div>
                             
                             {/* Content at bottom with increased spacing */}
-                            <p className="text-base text-[#AAC7FF] leading-5 pr-8 mb-8 font-regular">
+                            <p className="text-[15px] text-[#AAC7FF] leading-[31px]">
                             I believe great brands are built at the intersection of intent and identity. I care about smart decisions, scalable systems, and honest expression. From first insight to final file, I bring a mix of sharp thinking, empathy, and execution that helps teams move with confidence and taste.
                             </p>
                         </div>
@@ -70,7 +70,7 @@ export default function HeroSection() {
                             <div className="border-t border-[#AAC7FF] w-full mb-4"></div>
                             
                             {/* Content at same level as left column heading */}
-                            <p className="text-sm text-[#AAC7FF] leading-5 mb-8">
+                            <p className="text-[12px] text-[#AAC7FF] leading-[20px] mb-8">
                             I play the game differently—fair, collaborative, and bullshit-free. Because design deserves better than rushed briefs and unpaid pitches.
                             </p>
                             
@@ -78,7 +78,7 @@ export default function HeroSection() {
                             <div className="flex-grow"></div>
                             
                             {/* Content at bottom with increased spacing */}
-                            <p className="text-base text-[#AAC7FF] leading-5 mb-14 ">
+                            <p className="text-[15px] text-[#AAC7FF] leading-[31px] mb-9 sm:mb-8.5 ">
                                 With 4+ years in brand identity and packaging, I’ve worked with fast-moving startups and founder-led brands to create design that cuts through noise and builds real connection. My work isn’t about trends — it’s about clarity, strategy, and story.
                             </p>
                         </div>
@@ -114,7 +114,7 @@ export default function HeroSection() {
                     {/* Main Heading */}
                     <div className="mb-6 lg:mb-8">
                         <h1 className="text-[#AAC7FF] text-2xl md:text-3xl lg:text-4xl font-domine leading-tight tracking-[-0.57px] font-normal">
-                        design today isn’t<br/> just aesthetic, it’s business-critical.
+                        design today isn’t<br/> just aesthetic, it’s<br/> business-critical.
                         </h1>
                     </div>
 
@@ -132,7 +132,7 @@ export default function HeroSection() {
                             <div className="flex-grow min-h-1 md:min-h-8"></div>
                             
                             {/* Content at bottom with reduced spacing */}
-                            <p className="text-xs md:text-sm text-[#AAC7FF] leading-4 md:leading-5 pr-6 md:pr-4 mb-10 md:mb-6 font-regular">
+                            <p className="text-xs md:text-sm text-[#AAC7FF] leading-4 md:leading-5 pr-6 md:pr-4 mb-1 md:mb-6 font-regular">
                             I believe great brands are built at the intersection of intent and identity. I care about smart decisions, scalable systems, and honest expression. From first insight to final file, I bring a mix of sharp thinking, empathy, and execution that helps teams move with confidence and taste.
                             </p>
                         </div>

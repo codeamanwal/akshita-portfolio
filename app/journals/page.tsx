@@ -76,10 +76,8 @@ export default function JournalsPage() {
                   <h2 className="text-3xl lg:text-5xl font-regular leading-[109px] tracking-[-1px] text-[#2C2216] ">
                     /journals
                   </h2>
-                  <p className="text-[#2C2216] text-base lg:text-[18px] leading-relaxed">
-                    A protein snacking brand based in india, redefining proteon snacking in india as a mission to protein. 
-                    A protein snacking brand based in india, redefining proteon snacking in india as a mission to protein. 
-                    A protein snacking brand based in india, redefining proteon
+                  <p className="text-[#2C2216] text-base lg:text-[18px] leading-[25px] w-[361px]">
+                  From published pieces and interviews to unfiltered posts and notes from the field — this is where I document, reflect, and occasionally rant. Some of it’s sharp, some scrappy — all of it shaped by building brands in the real world.
                   </p>
                 </div>
                 
@@ -232,14 +230,14 @@ export default function JournalsPage() {
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-10">
               
               {/* Left Side - Image */}
-              <div className="hidden lg:block lg:w-[50%]">
-                <div className="relative lg:-top-30">
+              <div className="hidden lg:block lg:w-[36%]">
+                <div className="relative lg:-top-5 mr-10">
                   <Image
-                    src="/journals3.png"
+                    src="/journal_page.png"
                     alt="Lorem Ipsum journal with binoculars"
-                    className="w-full h-auto object-contain -rotate-4"
-                    width={800}
-                    height={400}
+                    className="  object-contain -rotate-3.75"
+                    width={450}
+                    height={390}
                   />
                 </div>
               </div>

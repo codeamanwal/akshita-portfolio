@@ -52,7 +52,7 @@ export default function ContactForm() {
 
   // Google Form action URL
   const GOOGLE_FORM_ACTION =
-    'https://docs.google.com/forms/d/e/1FAIpQLSeoqsFhn9MxD4D-j7Q1FpYdDg_gmpSV2ho5sdscPGdD9klRlw/formResponse';
+    'https://docs.google.com/forms/d/e/1FAIpQLScEXU7CTTDvXZREc-NlLijv5rQY-qDdtNEOYDSD8gO_DIsikg/formResponse';
 
   const validateForm = () => {
     const { fullName, phoneNo, emailId, interests, message } = formData;
@@ -73,13 +73,14 @@ export default function ContactForm() {
     }
 
     const formBody = new FormData();
-    formBody.append('entry.475787856', formData.fullName); // Full Name
-    formBody.append('entry.1622469482', formData.phoneNo); // Phone No.
-    formBody.append('entry.180372666', formData.emailId); // Email
+    formBody.append('entry.1828138873', formData.fullName); // Full Name
+    formBody.append('entry.905584698', formData.emailId);   // Email (changed position)
+    formBody.append('entry.1317610834', formData.phoneNo);  // Phone No.
     formData.interests.forEach(interest => {
-      formBody.append('entry.1897569207', interest);
-    });// Interests
-    formBody.append('entry.1699600507', formData.message); // Message
+      formBody.append('entry.858069677', interest);         // Interests
+    });
+    formBody.append('entry.798685867', formData.message);   // Message
+  
 
     try {
       await fetch(GOOGLE_FORM_ACTION, {

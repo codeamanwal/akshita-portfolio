@@ -44,7 +44,7 @@ const AboutSection = () => {
 
             <div className="flex flex-col items-center md:items-start  md:ml-6">
               <p className="md:text-base md:text-md uppercase mb-6 text-center md:text-left font-bold">
-              Because in a crowded market, design is not just the finish-
+              Because in a crowded market, design is not just the finish line-
               it’s the foundation.
               </p>
               <div className="flex items-center justify-center">

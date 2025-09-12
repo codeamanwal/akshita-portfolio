@@ -232,34 +232,36 @@ export default async function PlayPage() {
       <div className="min-h-screen">
         {/* Hero Section */}
         <section className="relative bg-[#2C2216] py-16 lg:py-24">
-          <div className="lg:w-full mx-auto flex flex-col lg:flex-row">
-            {/* Left Content */}
-            <div className="text-[#AAC7FF] mt-8 lg:mt-16 lg:ml-36  z-10 ">
-              <h1 className="text-[32px] lg:text-5xl text-center lg:text-left font-light leading-[109px]  tracking-[-1px] mb-4">
-              /out in the wild
-              </h1>
-              <p className=" max-w-5xl leading-[25px] text-center lg:text-left text-sm lg:text-base mx-[7px] lg:mx-0 lg:mr-18">
-              A peek behind the scenes of the brands<br/> I’ve helped bring to life — from first calls to final packaging, launch links, founder notes, and everything in between. These aren’t just projects. They’re partnerships. And this is where the work goes from design files… to real shelves, scrolls, and stories.
-              </p>
-            </div>
+  <div className="lg:w-full mx-auto flex flex-col lg:flex-row items-center">
+    {/* Left Content */}
+    <div className="text-[#AAC7FF] mt-2 lg:mt-0 pl-6 lg:pl-20 z-10 max-w-2xl relative lg:-top-25 mr-2">
+  <h1 className="text-[32px] lg:text-[48px] font-light leading-tight tracking-[-1px] mb-6 leading-[109.7px]">
+    /out in the wild
+  </h1>
+  <p className="leading-[25px] text-sm lg:text-lg font-light">
+    A peek behind the scenes of the brands<br /> I’ve helped bring to life — from first calls to final packaging,
+    launch links, founder notes, and everything in between. These aren’t just projects. They’re partnerships. And
+    this is where the work goes from design files… to real shelves, scrolls, and stories.
+  </p>
+</div>
 
-            {/* Right Image */}
-            <div className="flex justify-center lg:justify-end z-0 pt-18 lg:pt-0">
-              <div className="relative right-0">
-                {heroImageUrl && (
-                  <Image
-                    src={heroImageUrl}
-                    alt="Hero"
-                    width={1250}
-                    height={400}
-                    className="lg:max-w-[1120px] lg:max-h-full object-contain h-auto drop-shadow-lg"
-                    priority
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
+    {/* Right Image */}
+    <div className="flex justify-center lg:justify-end z-0 mt-10">
+      <div className="relative right-0">
+        {heroImageUrl && (
+          <Image
+            src={heroImageUrl}
+            alt="Hero"
+            width={990}
+            height={400}
+            className="lg:max-w-[1120px] lg:max-h-full object-contain h-auto drop-shadow-lg"
+            priority
+          />
+        )}
+      </div>
+    </div>
+  </div>
+</section>
 
         {/* Products Section */}
         <section className="py-16 lg:py-24 px-6 lg:px-8">

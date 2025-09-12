@@ -182,14 +182,14 @@ export default function AbtCoreValues() {
                                 >
                                     {/* Left Column - Packaging Image */}
                                     <div className="lg:col-span-1 mt-8 md:mt-20 lg:mt-40">
-                                        <div className="w-48 h-48 lg:w-64 lg:h-64 bg-amber-100 rounded-lg overflow-hidden mx-auto lg:mx-0">
-                                            <Image 
+                                        <div className="w-48 h-48 lg:w-64 lg:h-64 rounded-lg overflow-hidden mx-auto lg:mx-0">
+                                            {/* <Image 
                                                 src="/Mask-group.png" 
                                                 alt="Packaging Design" 
                                                 width={340}
                                                 height={356}
                                                 className="w-full h-full object-cover"
-                                            />
+                                            /> */}
                                         </div>
                                     </div>
                                     

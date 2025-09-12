@@ -24,7 +24,7 @@
 // }
 import { notFound } from 'next/navigation';
 import { fetchFromStrapi, getStrapiMedia } from '@/lib/strapi';
-import ProjectDetailClient, { ProjectData } from './ProjectDetailClient';
+import ProjectDetailClient, { MediaItem, ProjectData } from './ProjectDetailClient';
 
 function extractBlocksToText(blocks: any): string {
   if (!blocks) return '';
@@ -46,7 +46,6 @@ function extractBlocksToText(blocks: any): string {
   return '';
 }
 
-// Updated interface to match Next.js App Router expectations
 interface PageProps {
   params: Promise<{
     projectId: string;
@@ -54,7 +53,6 @@ interface PageProps {
 }
 
 export default async function Page({ params }: PageProps) {
-  // Await the params as they are now a Promise in newer Next.js versions
   const { projectId } = await params;
   const slug = projectId;
 
@@ -67,6 +65,31 @@ export default async function Page({ params }: PageProps) {
     notFound();
   }
 
+  const mapMedia = (media: any): MediaItem[] => {
+    if (!media) return [];
+    if (Array.isArray(media)) {
+      return media
+        .map((file: any) =>
+          file?.url
+            ? {
+                url: getStrapiMedia(file.url),
+                type: file.mime?.startsWith('video') ? 'video' : 'image',
+                alt: file.alternativeText || 'Project media',
+                formats: file.formats || null,
+              }
+            : null
+        )
+        .filter(Boolean) as MediaItem[];
+    }
+    return [
+      {
+        url: getStrapiMedia(media.url),
+        type: media.mime?.startsWith('video') ? 'video' : 'image',
+        alt: media.alternativeText || 'Project media',
+      },
+    ];
+  };
+
   const project: ProjectData = {
     id: item.slug || String(item.id),
     name: item.name || '',
@@ -74,12 +97,10 @@ export default async function Page({ params }: PageProps) {
     about: extractBlocksToText(item.about),
     services: item.services || '',
     images: {
-      hero: item?.hero?.url ? getStrapiMedia(item.hero.url) : '/placeholder.png',
-      gallery: Array.isArray(item?.gallery)
-        ? item.gallery
-            .map((img: any) => (img?.url ? getStrapiMedia(img.url) : null))
-            .filter(Boolean)
-        : [],
+      hero: mapMedia(item.hero)[0] || null,
+      heroMobile: mapMedia(item.heroMobile)[0] || null,
+      gallery: mapMedia(item.gallery) || [],
+      galleryMobile: mapMedia(item.galleryMobile) || [],
     },
     details: {
       challenge: extractBlocksToText(item.challenge),
@@ -90,7 +111,6 @@ export default async function Page({ params }: PageProps) {
 
   return <ProjectDetailClient project={project} />;
 }
-
 // // Sample project data - in a real app, this would come from a CMS or API
 // const projectsData: Record<string, ProjectData> = {
 //   'green-oasis': {
