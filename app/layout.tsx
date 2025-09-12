@@ -60,13 +60,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <nav style={{ display: "flex", gap: "1.5rem", padding: "1rem" }}>
+          {/* <nav style={{ display: "flex", gap: "1.5rem", padding: "1rem"  }}>
               <a href="/contact">Contact</a>
               <a href="/about">About</a>
               <a href="/work">Work</a>
               <a href="/play">Shelf</a>
               <a href="/journals">Journals</a>
-          </nav>
+          </nav> */}
           <main className="min-h-screen font-body">{children}</main>
           <HeroBanner />
         </ThemeProvider>
