@@ -1,0 +1,33 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "url": "https://www.akshitaagarwal.com",
+  "name": "Akshita Agarwal",
+  "department": [
+    {
+      "@type": "Person",
+      "name": "Contact",
+      "url": "https://www.akshitaagarwal.com/contact"
+    },
+    {
+      "@type": "Person",
+      "name": "About",
+      "url": "https://www.akshitaagarwal.com/about"
+    },
+    {
+      "@type": "Person",
+      "name": "Work",
+      "url": "https://www.akshitaagarwal.com/work"
+    },
+    {
+      "@type": "Person",
+      "name": "Play",
+      "url": "https://www.akshitaagarwal.com/play"
+    },
+    {
+      "@type": "Person",
+      "name": "Journals",
+      "url": "https://www.akshitaagarwal.com/journals"
+    }
+  ]
+}
