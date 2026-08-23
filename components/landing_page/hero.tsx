@@ -11,7 +11,7 @@ export default function Hero() {
       <div>
         {" "}
         <div className=" hidden md:flex text-xs md:text-sm text-[#2C2216] tracking-wider  uppercase border-t border-b border-[#2C2216] py-2 flex-wrap justify-center gap-4 ">
-          <Marquee speed={180}>
+          <Marquee speed={45}>
             <div>
               <ul className="flex flex-wrap gap-14">
                 <li ></li>
@@ -35,7 +35,7 @@ export default function Hero() {
           </Marquee>
         </div>
         <div className="md:hidden text-xs text-[#2C2216] tracking-wider  uppercase border-t border-b border-[#2C2216] py-2  flex flex-wrap justify-center gap-8">
-          <Marquee>
+          <Marquee speed={35}>
             <div>
               <ul className="flex flex-wrap gap-8">
                 <li ></li>
@@ -82,21 +82,19 @@ export default function Hero() {
   />
 </div>
 
-      <div className="mt-8 flex flex-row items-start justify-between md:justify-center mx-4 md:mx-24">
-  {/* Hero Content */}
-  {/* Left Text Column (mobile stacked) */}
-  <div className="flex flex-col items-start text-[#2C2216] text-sm md:text-base leading-relaxed mx-1 max-w-[50%] sm:max-w-2xs md:max-w-full lg:mx-18">
-    <p>
-      Strong brands aren’t just seen - they’re felt. They know who they’re speaking to, what they stand for, and how to show up in ways that actually stick. That’s where design comes in.
-    </p>
-  </div>
+      <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12 md:gap-16 max-w-[1108px] mx-auto px-6 sm:px-8 text-[#2C2216] text-sm md:text-base leading-relaxed">
+        <div>
+          <p>
+            Strong brands aren’t just seen - they’re felt. They know who they’re speaking to, what they stand for, and how to show up in ways that actually stick. That’s where design comes in.
+          </p>
+        </div>
 
-  <div className="flex flex-col items-start text-[#2C2216] text-sm md:text-base leading-relaxed max-w-[50%] sm:max-w-2xs md:max-w-full mx-1 sm:mx-8 lg:mx-18">
-    <p>
-      Not as the final layer, but as a strategic tool - one that turns positioning into presence, and decisions into identity. It’s what brings clarity and cohesion to every touchpoint- from shelves to screens and everything in between.
-    </p>
-  </div>
-</div>
+        <div>
+          <p>
+            Not as the final layer, but as a strategic tool - one that turns positioning into presence, and decisions into identity. It’s what brings clarity and cohesion to every touchpoint- from shelves to screens and everything in between.
+          </p>
+        </div>
+      </div>
 
     </section>
   );

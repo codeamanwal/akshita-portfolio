@@ -80,12 +80,6 @@ export default function JournalsPage() {
                   From published pieces and interviews to unfiltered posts and notes from the field — this is where I document, reflect, and occasionally rant. Some of it’s sharp, some scrappy — all of it shaped by building brands in the real world.
                   </p>
                 </div>
-                
-                <div className="mt-16">
-                  <h3 className="text-2xl lg:text-[32px] font-regular text-[#2C2216]">
-                    /industry
-                  </h3>
-                </div>
               </div>
             </div>
 

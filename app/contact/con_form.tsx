@@ -15,10 +15,8 @@ export default function ContactForm() {
 
   const interestOptions = [
     'Brand Strategy',
-    'Publication Design',
     'Design Consultation',
     'Visual Identity',
-    'UI/UX',
     'Collaborations',
     'Packaging Design',
     'Rebranding'

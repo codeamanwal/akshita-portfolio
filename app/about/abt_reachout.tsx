@@ -4,21 +4,21 @@ import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import Image from "next/image";
 import Link from 'next/link';
+import Marquee from 'react-fast-marquee';
 
 export default function AbtReachout() {
-  // Text for the auto-scrolling strip
   const scrollText =
-    "LET'S BUILD SOMETHING BOLD. REACH OUT FOR COMMISSIONS, COLLABS, OR CONSULTS. LET'S BUILD SOMETHING BOLD. REACH OUT FOR COMMISSIONS, COLLABS, OR CONSULTS.";
+    "LET'S BUILD SOMETHING BOLD. REACH OUT FOR COMMISSIONS, COLLABS, OR CONSULTS.";
 
   return (
     <div className="">
       {/* Auto-scrolling angled text strip */}
       <div className="relative h-10 lg:h-16 bg-[#AAC7FF] flex items-center overflow-hidden transform -rotate-[1.07deg] -mt-6 z-60">
-        <div className="animate-scroll whitespace-nowrap">
-          <span className="text-[#51331B] font-regular text-[11px] lg:text-lg tracking-[2.7px] lg:tracking-[4px] leading-5 lg:leading-8">
-            {scrollText.repeat(1)}
+        <Marquee speed={55} autoFill>
+          <span className="text-[#51331B] font-regular text-[11px] lg:text-lg tracking-[2.7px] lg:tracking-[4px] leading-5 lg:leading-8 mr-8">
+            {scrollText}
           </span>
-        </div>
+        </Marquee>
       </div>
 
       <section className="relative z-50 py-6 lg:py-20 h-auto mb-0">
@@ -67,21 +67,6 @@ export default function AbtReachout() {
     </div>
   </div>
 </section>
-
-      {/* CSS for auto-scroll animation */}
-      <style jsx>{`
-        @keyframes scroll {
-          0% {
-            transform: translateX(100%);
-          }
-          100% {
-            transform: translateX(-100%);
-          }
-        }
-        .animate-scroll {
-          animation: scroll 12s linear infinite;
-        }
-      `}</style>
     </div>
   );
 }

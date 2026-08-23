@@ -1,25 +1,25 @@
-const API_URL = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+function getBaseUrl() {
+  return process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+}
 
 export async function fetchFromStrapi(path: string) {
+  const baseUrl = getBaseUrl();
   try {
-     const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
-    const res = await fetch(`${API_URL}${path}`, { cache: 'no-store' });
-    return res.json();
+    const res = await fetch(`${baseUrl}${path}`, { cache: 'no-store' });
+    if (!res.ok) {
+      console.warn(`[Strapi Warning] Fetch returned status ${res.status} for path "${path}"`);
+      return null;
+    }
+    return await res.json();
   } catch (error) {
-    throw error
+    console.warn(`[Strapi Warning] Fetch failed for path "${path}" at ${baseUrl}:`, error);
+    return null;
   }  
-    
 }
 
 export function getStrapiMedia(url: string) {
-  try {
-    const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
-    if (!url) return '';
-    // If already an absolute URL (like from Cloudinary), just return it
-    if (url.startsWith('http')) return url;
-    return `${API_URL}${url}`;
-  } catch (error) {
-    throw error
-  }
-    
+  if (!url) return '';
+  if (url.startsWith('http')) return url;
+  const baseUrl = getBaseUrl();
+  return `${baseUrl}${url}`;
 }

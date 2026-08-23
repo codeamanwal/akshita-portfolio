@@ -12,8 +12,6 @@ const cards: CardType[] = [
   { url: "/brand1.1.png", title: "branding strategy", id: 1 },
   { url: "/visual2.1.png", title: "visual identity", id: 2 },
   { url: "/brand3.png", title: "packaging design", id: 3 },
-  { url: "/publication_design.png", title: "publication design", id: 4 },
-  { url: "/uiux.1.1.png", title: "uiux design", id: 5 },
 ];
 
 const ScrollCarousel = () => {
