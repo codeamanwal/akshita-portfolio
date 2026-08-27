@@ -177,6 +177,10 @@ export default function WorksWith() {
           `${STRAPI_URL}/api/about-images?populate=image&sort=order:asc&publicationState=live`,
           { cache: "no-store" }
         );
+        if (!res.ok) {
+          setImages([]);
+          return;
+        }
         const json = await res.json();
         const arr = Array.isArray(json?.data) ? json.data : [];
         setImages(arr);

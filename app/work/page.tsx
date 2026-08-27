@@ -333,6 +333,7 @@ export default function WorkPage() {
         const res = await fetch(
           `${STRAPI_URL}/api/projects?populate=image&sort[0]=order:asc`
         );
+        if (!res.ok) return;
         const json = await res.json();
 
         if (json.data) {

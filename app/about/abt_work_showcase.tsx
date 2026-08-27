@@ -68,8 +68,11 @@ export default function WorkShowcase() {
         const res = await fetch(
           `${STRAPI_URL}/api/work-showcase-folders?populate[cardImage]=true&populate[items]=true`
         );
+        if (!res.ok) {
+          return;
+        }
         const json = await res.json();
-        console.log(json);
+        if (!json?.data) return;
 
         const apiData = json.data.map((entry: any) => ({
           id: entry.folderId,

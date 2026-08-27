@@ -54,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${domine.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${dmSans.variable} ${domine.variable}`}>
       <head>
       <meta name="google-site-verification" content="google0cb3aff4c07362a2.html" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: `{

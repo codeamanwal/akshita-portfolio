@@ -108,6 +108,7 @@ export default function AbtCarousel() {
         const res = await fetch(
           `${STRAPI_URL}/api/about-carousels?populate=image&sort=order:asc`
         );
+        if (!res.ok) return;
         const json = await res.json();
 
         // Map Strapi response into our interface

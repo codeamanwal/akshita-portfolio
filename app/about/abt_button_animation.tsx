@@ -91,18 +91,16 @@ export default function HeroSection() {
                 </motion.div>
 
                 <div className="flex-[0.7] relative bg-[#40352F] flex items-center justify-center overflow-hidden">
-                {portraitUrl && (
-                        <Image
-                        src={portraitUrl}
-                        alt="woman"
-                        width={1400}
-                        height={1808}
-                        quality={100}
-                        priority
-                        unoptimized={true}
-                        className="object-cover h-full absolute left-0"
-                        />
-                    )}
+                    <Image
+                    src={portraitUrl || "/women_portrait.png"}
+                    alt="woman"
+                    width={1400}
+                    height={1808}
+                    quality={100}
+                    priority
+                    unoptimized={true}
+                    className="object-cover h-full absolute left-0"
+                    />
                 </div>
             </div>
 
@@ -153,20 +151,18 @@ export default function HeroSection() {
                 {/* Image Section - Full width, no padding, within section boundaries */}
                 <div className="relative w-full h-[75vh] sm:h-[90vh] md:h-[100vh] lg:h-[60vh] bg-[#40352F] overflow-hidden">
                     {/* Women portrait image - positioned towards bottom right like in reference */}
-                    {portraitUrl && (
-            <div className="absolute inset-0 flex">
-              <Image
-                src={portraitUrl}
-                alt="woman"
-                width={800}
-                height={836}
-                quality={100}
-                unoptimized={true}
-                className="object-cover h-full w-full"
-                priority
-              />
-            </div>
-          )}
+                    <div className="absolute inset-0 flex">
+                      <Image
+                        src={portraitUrl || "/women_portrait.png"}
+                        alt="woman"
+                        width={800}
+                        height={836}
+                        quality={100}
+                        unoptimized={true}
+                        className="object-cover h-full w-full"
+                        priority
+                      />
+                    </div>
                 </div>
             </div>
             
