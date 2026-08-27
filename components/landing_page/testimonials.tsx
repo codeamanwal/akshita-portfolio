@@ -144,9 +144,11 @@ export default function Testimonials() {
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
+        const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/testimonials?sort=number:asc`
+          `${baseUrl}/api/testimonials?sort=number:asc`
         );
+        if (!res.ok) return;
         const data = await res.json();
 
         const mapped = data.data.map((item: any) => ({

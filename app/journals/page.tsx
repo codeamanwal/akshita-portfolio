@@ -13,9 +13,11 @@ export default function JournalsPage() {
   useEffect(() => {
     const fetchJournals = async () => {
       try {
+        const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/journals?populate=*`
+          `${baseUrl}/api/journals?populate=*`
         )
+        if (!res.ok) return;
         const data = await res.json()
         const formatted = data.data.map((item: any) => {
           const cover =

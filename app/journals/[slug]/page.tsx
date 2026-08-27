@@ -10,10 +10,14 @@ export default async function JournalDetailPage(props: { params: Promise<PagePar
   const { slug } = await props.params
   
   // Fetch the journal from Strapi by slug
+  const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/journals?filters[slug][$eq]=${slug}&populate=*`,
+    `${baseUrl}/api/journals?filters[slug][$eq]=${slug}&populate=*`,
     { cache: "no-store" }
   )
+  if (!res.ok) {
+    notFound()
+  }
   const data = await res.json()
 
   if (!data?.data?.length) {
