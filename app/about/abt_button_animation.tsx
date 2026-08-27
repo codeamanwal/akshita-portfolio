@@ -37,39 +37,44 @@ export default function HeroSection() {
             {/* Desktop Layout */}
             <div className="hidden lg:flex h-full relative">
                 
-                <div className="flex-1 bg-[#40352F] px-16 xl:px-20 py-12 xl:py-15 flex flex-col justify-between">
+                <div className="flex-1 bg-[#40352F] px-12 xl:px-20 py-12 xl:py-16 flex flex-col justify-between">
                     {/* Main Heading */}
-                    <div className="mb-10 xl:mb-12">
-                        <h1 className="text-[#AAC7FF] text-4xl lg:text-5xl min-[1400px]:text-6xl font-domine leading-tight tracking-[-0.57px] font-normal">
-                        design today isn’t<br/> just aesthetic, it’s business-critical.
+                    <div className="mb-12 xl:mb-16">
+                        <h1 className="text-[#AAC7FF] text-4xl lg:text-5xl min-[1400px]:text-[64px] font-domine leading-[1.12] tracking-[-0.57px] font-normal">
+                        design today isn’t<br /> just aesthetic, it’s<br /> business-critical.
                         </h1>
                     </div>
 
-                    {/* Two Column Layout */}
-                    <div className="grid grid-cols-2 gap-12 xl:gap-20">
-                        {/* Left Column */}
-                        <div className="flex flex-col">
-                            {/* Horizontal line */}
-                            <div className="border-t border-[#AAC7FF] w-full mb-4"></div>
-                            
-                            {/* Section heading */}
-                            <h2 className="text-base xl:text-lg font-semibold uppercase text-[#AAC7FF] tracking-wider mb-4 xl:mb-6">The Design Game</h2>
-                            
-                            <p className="text-[14px] xl:text-[15px] text-[#AAC7FF] leading-[26px] xl:leading-[29px]">
-                            I believe great brands are built at the intersection of intent and identity. I care about smart decisions, scalable systems, and honest expression. From first insight to final file, I bring a mix of sharp thinking, empathy, and execution that helps teams move with confidence and taste.
-                            </p>
+                    {/* Content Section matching exact reference structure */}
+                    <div className="flex flex-col justify-between flex-1 max-w-[840px]">
+                        {/* Top sub-row */}
+                        <div className="grid grid-cols-2 gap-10 xl:gap-16 items-start">
+                            {/* Left: Section Header */}
+                            <div>
+                                <div className="border-t border-[#AAC7FF]/40 w-full mb-4"></div>
+                                <h2 className="text-sm xl:text-base font-semibold uppercase text-[#AAC7FF] tracking-wider">
+                                    THE DESIGN GAME
+                                </h2>
+                            </div>
+
+                            {/* Right: Pitch statement */}
+                            <div>
+                                <div className="border-t border-[#AAC7FF]/40 w-full mb-4"></div>
+                                <p className="text-[13px] xl:text-[14px] text-[#AAC7FF] leading-[22px] xl:leading-[24px]">
+                                    I play the game differently—fair, collaborative, and bullshit-free. Because design deserves better than rushed briefs and unpaid pitches.
+                                </p>
+                            </div>
                         </div>
 
-                        {/* Right Column */}
-                        <div className="flex flex-col">
-                            {/* Horizontal line */}
-                            <div className="border-t border-[#AAC7FF] w-full mb-4"></div>
-                            
-                            <p className="text-[14px] xl:text-[15px] text-[#AAC7FF] leading-[26px] xl:leading-[29px] mb-4 xl:mb-6">
-                            I play the game differently—fair, collaborative, and bullshit-free. Because design deserves better than rushed briefs and unpaid pitches.
+                        {/* Bottom main body paragraphs */}
+                        <div className="grid grid-cols-2 gap-10 xl:gap-16 pt-16 xl:pt-24 items-start">
+                            {/* Left paragraph */}
+                            <p className="text-[14px] xl:text-[15px] text-[#AAC7FF] leading-[26px] xl:leading-[28px]">
+                                I believe great brands are built at the intersection of intent and identity. I care about smart decisions, scalable systems, and honest expression. From first insight to final file, I bring a mix of sharp thinking, empathy, and execution that helps teams move with confidence and taste.
                             </p>
-                            
-                            <p className="text-[14px] xl:text-[15px] text-[#AAC7FF] leading-[26px] xl:leading-[29px]">
+
+                            {/* Right paragraph */}
+                            <p className="text-[14px] xl:text-[15px] text-[#AAC7FF] leading-[26px] xl:leading-[28px]">
                                 With 4+ years in brand identity and packaging, I’ve worked with fast-moving startups and founder-led brands to create design that cuts through noise and builds real connection. My work isn’t about trends — it’s about clarity, strategy, and story.
                             </p>
                         </div>
