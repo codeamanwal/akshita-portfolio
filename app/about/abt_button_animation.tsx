@@ -23,7 +23,7 @@ export default function HeroSection() {
     async function getPortrait() {
       try {
         const data = await fetchFromStrapi("/api/about-page-portrait?populate=*");
-        const url = data?.data?.Portrait_Image?.formats?.small?.url || data?.data?.Portrait_Image?.url;
+        const url = data?.data?.Portrait_Image?.url;
         if (url) setPortraitUrl(getStrapiMedia(url));
       } catch (err) {
         console.error("Failed to fetch portrait:", err);
@@ -92,8 +92,9 @@ export default function HeroSection() {
                         alt="woman"
                         width={1400}
                         height={1808}
-                        quality={95}
+                        quality={100}
                         priority
+                        unoptimized={true}
                         className="object-cover h-full absolute left-0"
                         />
                     )}
@@ -154,7 +155,8 @@ export default function HeroSection() {
                 alt="woman"
                 width={800}
                 height={836}
-                quality={95}
+                quality={100}
+                unoptimized={true}
                 className="object-cover h-full w-full"
                 priority
               />
