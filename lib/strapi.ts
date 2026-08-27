@@ -1,5 +1,5 @@
 function getBaseUrl() {
-  return process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+  return process.env.NEXT_PUBLIC_STRAPI_URL || 'https://portfolio-cms-a0hn.onrender.com';
 }
 
 export async function fetchFromStrapi(path: string) {

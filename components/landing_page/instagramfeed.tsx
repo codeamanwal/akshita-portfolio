@@ -29,9 +29,9 @@ const InstagramFeed = () => {
         const data = await fetchFromStrapi(
           "/api/instagram-feeds?populate=Post&sort=orderNo:asc"
         );
-        setPosts(data.data || []);
+        setPosts(data?.data || []);
       } catch (error) {
-        console.error("Failed to fetch Instagram feed:", error);
+        console.warn("Failed to fetch Instagram feed:", error);
       } finally {
         setLoading(false);
       }

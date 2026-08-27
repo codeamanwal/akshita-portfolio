@@ -49,7 +49,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ cards: propCards })
           setFetchedCards(mapped);
         }
       } catch (err) {
-        console.error("Failed to fetch images:", err);
+        console.warn("Failed to fetch images:", err);
       }
     };
     fetchImages();

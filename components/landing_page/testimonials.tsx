@@ -137,31 +137,63 @@ type Testimonial = {
   number: number | null;
 };
 
+const DEFAULT_TESTIMONIALS: Testimonial[] = [
+  {
+    id: 4,
+    name: "Abhishek Kumawat",
+    brand: "YOLO ROOTS",
+    quote: "Working with Akshita was a game-changer for our brand. Their strategic design approach not only made our packaging stand out but also helped us connect with our audience on a deeper level. A true design partner in every sense!",
+    number: 1,
+  },
+  {
+    id: 7,
+    name: "Shiba",
+    brand: "WOMBS",
+    quote: "Working with Akshita was a game-changer for our brand. Their strategic design approach not only made our packaging stand out but also helped us connect with our audience on a deeper level. A true design partner in every sense!",
+    number: 2,
+  },
+  {
+    id: 10,
+    name: "Shankar",
+    brand: "MINUS",
+    quote: "Working with Akshita was a game-changer for our brand. Their strategic design approach not only made our packaging stand out but also helped us connect with our audience on a deeper level. A true design partner in every sense!",
+    number: 3,
+  },
+  {
+    id: 13,
+    name: "Rishab",
+    brand: "RETHINK",
+    quote: "Working with Akshita was a game-changer for our brand. Their strategic design approach not only made our packaging stand out but also helped us connect with our audience on a deeper level. A true design partner in every sense!",
+    number: 4,
+  },
+];
+
 export default function Testimonials() {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(DEFAULT_TESTIMONIALS);
   const [current, setCurrent] = useState(1);
 
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+        const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "https://portfolio-cms-a0hn.onrender.com";
         const res = await fetch(
           `${baseUrl}/api/testimonials?sort=number:asc`
         );
         if (!res.ok) return;
         const data = await res.json();
 
-        const mapped = data.data.map((item: any) => ({
-          id: item.id,
-          name: item.name,
-          brand: item.brand,
-          quote: item.quote?.[0]?.children?.[0]?.text || "",
-          number: item.number,
-        }));
-
-        setTestimonials(mapped);
+        if (Array.isArray(data?.data) && data.data.length > 0) {
+          const mapped = data.data.map((item: any) => ({
+            id: item.id,
+            name: item.name,
+            brand: item.brand,
+            quote: item.quote?.[0]?.children?.[0]?.text || item.quote || "",
+            number: item.number,
+          }));
+          setTestimonials(mapped);
+        }
       } catch (err) {
-        console.error("Error fetching testimonials:", err);
+        console.warn("Could not load Strapi testimonials, using default fallback.");
       }
     };
 
