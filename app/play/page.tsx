@@ -211,7 +211,7 @@ async function getHero() {
 
 // Fetch products data
 async function getProducts() {
-  const res = await fetch(`${STRAPI_URL}/api/play-products?populate=images`, {
+  const res = await fetch(`${STRAPI_URL}/api/play-products?populate=images&sort[0]=order:asc`, {
     cache: "no-store",
   })
   if (!res.ok) throw new Error("Failed to fetch products")

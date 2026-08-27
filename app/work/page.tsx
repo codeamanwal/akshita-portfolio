@@ -331,7 +331,7 @@ export default function WorkPage() {
     async function fetchProjects() {
       try {
         const res = await fetch(
-          `${STRAPI_URL}/api/projects?populate=image&sort[0]=id:asc`
+          `${STRAPI_URL}/api/projects?populate=image&sort[0]=order:asc`
         );
         const json = await res.json();
 

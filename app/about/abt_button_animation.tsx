@@ -90,8 +90,10 @@ export default function HeroSection() {
                         <Image
                         src={portraitUrl}
                         alt="woman"
-                        width={700}
-                        height={904}
+                        width={1400}
+                        height={1808}
+                        quality={95}
+                        priority
                         className="object-cover h-full absolute left-0"
                         />
                     )}
@@ -150,8 +152,9 @@ export default function HeroSection() {
               <Image
                 src={portraitUrl}
                 alt="woman"
-                width={400}
-                height={418}
+                width={800}
+                height={836}
+                quality={95}
                 className="object-cover h-full w-full"
                 priority
               />

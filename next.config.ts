@@ -12,35 +12,34 @@ import type { NextConfig } from 'next';
 const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 const strapiHostname = strapiUrl.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
+const remotePatterns: any[] = [
+  {
+    protocol: 'http',
+    hostname: 'localhost',
+    port: '1337',
+    pathname: '/uploads/**',
+  },
+  {
+    protocol: 'https',
+    hostname: 'res.cloudinary.com',
+    pathname: '/**',
+  },
+];
+
+if (strapiHostname) {
+  remotePatterns.push({
+    protocol: 'https',
+    hostname: strapiHostname,
+    pathname: '/uploads/**',
+  });
+}
+
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '1337',
-        pathname: '/uploads/**',
-      },
-      {
-        protocol: 'https',
-        hostname: strapiHostname, // 👈 your Render backend
-        pathname: '/uploads/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
-        pathname: '/**', // 👈 allow all Cloudinary image paths
-      },
-      // Add production domain after deployment to Render
-      // {
-      //   protocol: 'https',
-      //   hostname: 'your-production-domain.com',
-      //   pathname: '/uploads/**',
-      // },
-    ],
+    remotePatterns,
   },
   eslint: {
-    ignoreDuringBuilds: true, // 👈 this lets build succeed even with lint errors
+    ignoreDuringBuilds: true,
   },
 };
 
