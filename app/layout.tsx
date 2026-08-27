@@ -17,29 +17,34 @@ const domine = Domine({
 });
 export const metadata: Metadata = {
   title: "Akshita",
-  description: "Design partner for consumer brands. I craft identities and packaging that connect, sell, and scale.",
-  
+  description: "That's where design comes in. Not as the final layer, but as a strategic tool - one that turns positioning into presence, and decisions into identity. It's what ...",
+  metadataBase: new URL("https://www.akshitaagarwal.com"),
+  icons: {
+    icon: "https://res.cloudinary.com/dqdwmctpi/image/upload/v1757573436/akshita_favicon_qauadf.png",
+    shortcut: "https://res.cloudinary.com/dqdwmctpi/image/upload/v1757573436/akshita_favicon_qauadf.png",
+    apple: "https://res.cloudinary.com/dqdwmctpi/image/upload/v1757573436/akshita_favicon_qauadf.png",
+  },
   openGraph: {
     title: "Akshita",
     description: "That's where design comes in. Not as the final layer, but as a strategic tool - one that turns positioning into presence, and decisions into identity. It's what ...",
-    url: "https://www.akshitaagarwal.com/", // <-- change to your real domain
-    siteName: "Portfolio",
+    url: "https://www.akshitaagarwal.com",
+    siteName: "Akshita",
     images: [
       {
-        url: "https://res.cloudinary.com/dqdwmctpi/image/upload/v1757573436/akshita_favicon_qauadf.png", // <-- change to your image
-        width: 1200,
-        height: 630,
-        alt: "Portfolio preview image",
+        url: "https://res.cloudinary.com/dqdwmctpi/image/upload/v1757573436/akshita_favicon_qauadf.png",
+        width: 600,
+        height: 600,
+        alt: "Akshita",
       },
     ],
     locale: "en_US",
     type: "website",
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Akshita",
     description: "That's where design comes in. Not as the final layer, but as a strategic tool - one that turns positioning into presence, and decisions into identity. It's what ...",
-    images: ["https://res.cloudinary.com/dqdwmctpi/image/upload/v1757573436/akshita_favicon_qauadf.png"], // <-- same as above
+    images: ["https://res.cloudinary.com/dqdwmctpi/image/upload/v1757573436/akshita_favicon_qauadf.png"],
   },
 };
 

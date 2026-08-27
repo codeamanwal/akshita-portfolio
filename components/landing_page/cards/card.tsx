@@ -129,6 +129,20 @@ interface WorkCardProps {
 
 const NAVBAR_HEIGHT_PX = 96;
 
+function parseColor(val?: string): string | undefined {
+  if (!val) return undefined;
+  const trimmed = val.trim();
+  if (!trimmed) return undefined;
+  if (trimmed.startsWith("#") || trimmed.startsWith("rgb") || trimmed.startsWith("hsl") || /^[a-zA-Z]+$/.test(trimmed)) {
+    return trimmed;
+  }
+  const match = trimmed.match(/\[(.*?)\]/);
+  if (match && match[1]) {
+    return match[1];
+  }
+  return trimmed;
+}
+
 const WorkCard: React.FC<WorkCardProps> = ({
   i,
   card,
@@ -145,6 +159,9 @@ const WorkCard: React.FC<WorkCardProps> = ({
     router.push(`/work/${slug}`);
   };
 
+  const bgColor = parseColor(card.bgColor);
+  const fontColor = parseColor(card.fontColor);
+
   return (
     <div
       className="w-full md:w-3xl lg:w-6xl flex items-center justify-center sticky overflow-visible px-4 z-[5]"
@@ -158,26 +175,42 @@ const WorkCard: React.FC<WorkCardProps> = ({
         className="relative transform-gpu w-full"
       >
         <div
-          className={`h-auto md:p-5 ${card.bgColor} relative px-3 pt-5 pb-3 cursor-pointer rounded-lg`}
+          className={`h-auto md:p-5 relative px-3 pt-5 pb-3 cursor-pointer rounded-lg ${card.bgColor || ""}`}
+          style={bgColor ? { backgroundColor: bgColor } : undefined}
           onClick={handleNavigateToProject}
         >
           <div className="items-start">
             <div>
               <div className="flex items-start justify-between">
-                <p className={`text-xs md:text-sm flex items-start ${card.fontColor}`}>
+                <p
+                  className={`text-xs md:text-sm flex items-start ${card.fontColor || ""}`}
+                  style={fontColor ? { color: fontColor } : undefined}
+                >
                   {card.services}
                 </p>
-                <p className={`text-xs md:text-sm ${card.fontColor}`}>
+                <p
+                  className={`text-xs md:text-sm ${card.fontColor || ""}`}
+                  style={fontColor ? { color: fontColor } : undefined}
+                >
                   /{card.industry}
                 </p>
               </div>
-              <div className={`${card.fontColor} border opacity-15 my-2`}></div>
+              <div
+                className={`border opacity-15 my-2 ${card.fontColor || ""}`}
+                style={fontColor ? { borderColor: fontColor } : undefined}
+              ></div>
               <div className="flex items-start justify-between">
-                <h1 className={`text-3xl md:text-4xl flex items-start mt-1 mb-5 ${card.fontColor}`}>
+                <h1
+                  className={`text-3xl md:text-4xl flex items-start mt-1 mb-5 ${card.fontColor || ""}`}
+                  style={fontColor ? { color: fontColor } : undefined}
+                >
                   {card.name}
                 </h1>
                 <div className="p-2 mt-4 hover:bg-white/10 transition">
-                  <ArrowRight className={`${card.fontColor} h-5 w-5`} />
+                  <ArrowRight
+                    className={`h-5 w-5 ${card.fontColor || ""}`}
+                    style={fontColor ? { color: fontColor } : undefined}
+                  />
                 </div>
               </div>
             </div>
