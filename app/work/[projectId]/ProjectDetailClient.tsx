@@ -16,11 +16,11 @@ export interface ProjectData {
   name: string;
   industry: string;
   about: string;
-  services: string;
+  services: any;
   heroRatio?: "Ratio_16x9" | "Ratio_1x1";
   images: {
-    hero: MediaItem;
-    heroMobile?: MediaItem;
+    hero: MediaItem | null;
+    heroMobile?: MediaItem | null;
     gallery: MediaItem[];
     galleryMobile?: MediaItem[];
     galleryItems?: { media: MediaItem; ratio?: string }[];
@@ -43,12 +43,19 @@ export function ProjectDetailClient({ project }: { project: ProjectData }) {
   }, []);
 
   const renderMedia = (
-    media: MediaItem,
+    media: MediaItem | null | undefined,
     alt: string,
     className: string,
     width: number,
     height: number
   ) => {
+    if (!media || !media.url) {
+      return (
+        <div className={`${className} bg-[#E5E0D8] flex items-center justify-center text-[#51331B]/50 font-sans text-sm`}>
+          No image
+        </div>
+      );
+    }
     if (media.type === "video") {
       return (
         <video
@@ -163,7 +170,14 @@ export function ProjectDetailClient({ project }: { project: ProjectData }) {
                       }}
                       viewport={{ once: true, amount: 0.3 }}
                     >
-                      {project.services}
+                      {Array.isArray(project.services)
+                        ? project.services
+                            .map((s: any) => (typeof s === "object" ? s?.name || s?.title || "" : String(s)))
+                            .filter(Boolean)
+                            .join(", ")
+                        : typeof project.services === "object" && project.services !== null
+                        ? (project.services as any)?.name || (project.services as any)?.title || ""
+                        : String(project.services || "")}
                     </motion.p>
                   </motion.div>
                   <motion.div className="flex flex-col gap-2">

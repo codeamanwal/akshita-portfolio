@@ -198,25 +198,36 @@ import Image from "next/image"
 import Navbar from "@/components/navbar"
 import ProductCard from "./ProductCard"
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "https://portfolio-cms-a0hn.onrender.com";
+
 // Fetch hero section data
 async function getHero() {
-  const res = await fetch(`${STRAPI_URL}/api/play-heroes?populate=heroImage`, {
-    cache: "no-store",
-  })
-  if (!res.ok) throw new Error("Failed to fetch hero data")
-  const data = await res.json()
-  return data.data?.[0] // take first entry
+  try {
+    const res = await fetch(`${STRAPI_URL}/api/play-heroes?populate=heroImage`, {
+      cache: "no-store",
+    })
+    if (!res.ok) return null
+    const data = await res.json()
+    return data.data?.[0] || null
+  } catch (err) {
+    console.warn("Failed to fetch play hero:", err)
+    return null
+  }
 }
 
 // Fetch products data
 async function getProducts() {
-  const res = await fetch(`${STRAPI_URL}/api/play-products?populate=images&sort[0]=order:asc`, {
-    cache: "no-store",
-  })
-  if (!res.ok) throw new Error("Failed to fetch products")
-  const data = await res.json()
-  return data.data || []
+  try {
+    const res = await fetch(`${STRAPI_URL}/api/play-products?populate=images&sort[0]=order:asc`, {
+      cache: "no-store",
+    })
+    if (!res.ok) return []
+    const data = await res.json()
+    return data.data || []
+  } catch (err) {
+    console.warn("Failed to fetch play products:", err)
+    return []
+  }
 }
 
 export default async function PlayPage() {
