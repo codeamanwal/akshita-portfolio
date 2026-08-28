@@ -311,7 +311,7 @@ interface Project {
   slug: string;
 }
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "https://portfolio-cms-a0hn.onrender.com";
 
 const sizeMap: Record<Project["size"], { w: number; h: number }> = {
   small: { w: 504, h: 539 },
@@ -358,7 +358,7 @@ export default function WorkPage() {
           setProjects(mapped);
         }
       } catch (err) {
-        console.error("Failed to fetch projects:", err);
+        console.warn("Failed to fetch projects:", err);
       } finally {
         setLoading(false);
       }
