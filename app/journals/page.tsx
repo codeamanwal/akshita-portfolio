@@ -13,7 +13,7 @@ export default function JournalsPage() {
   useEffect(() => {
     const fetchJournals = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+        const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "https://portfolio-cms-a0hn.onrender.com";
         const res = await fetch(
           `${baseUrl}/api/journals?populate=*`
         )
@@ -43,7 +43,7 @@ export default function JournalsPage() {
         
         setArticles(formatted)
       } catch (err) {
-        console.error("Error fetching journals:", err)
+        console.warn("Error fetching journals:", err)
       }
     }
   

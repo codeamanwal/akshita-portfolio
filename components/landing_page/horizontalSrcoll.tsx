@@ -36,16 +36,19 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ cards: propCards })
 
     const fetchImages = async () => {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
-        const res = await fetch(`${baseUrl}/api/images?populate=brand&sort[0]=order:asc`);
+        const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "https://portfolio-cms-a0hn.onrender.com";
+        const res = await fetch(`${baseUrl}/api/about-images?populate=*&sort[0]=order:asc`);
         if (!res.ok) return;
         const json = await res.json();
         if (json.data) {
-          const mapped = json.data.map((item: any) => ({
-            id: item.id,
-            url: `${item.brand.url}`, // prepend base URL
-            title: item.slug || item.brand.name, // fallback if slug missing
-          }));
+          const mapped = json.data.map((item: any) => {
+            const url = item.image_1x1?.url || item.image_4x3?.url || item.image_2x1?.url || item.image?.url || "/placeholder.png";
+            return {
+              id: item.id,
+              url: url,
+              title: item.title || `Brand ${item.id}`,
+            };
+          });
           setFetchedCards(mapped);
         }
       } catch (err) {

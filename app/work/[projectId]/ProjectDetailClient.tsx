@@ -17,11 +17,13 @@ export interface ProjectData {
   industry: string;
   about: string;
   services: string;
+  heroRatio?: "Ratio_16x9" | "Ratio_1x1";
   images: {
     hero: MediaItem;
     heroMobile?: MediaItem;
     gallery: MediaItem[];
     galleryMobile?: MediaItem[];
+    galleryItems?: { media: MediaItem; ratio?: string }[];
   };
   details: {
     challenge: string;
@@ -85,11 +87,13 @@ export function ProjectDetailClient({ project }: { project: ProjectData }) {
       <Navbar />
       <div className="min-h-screen bg-[#FEFCE4]">
         {/* Hero Image */}
-        <div className="relative rounded-lg bg-white mb-16">
+        <div className="relative rounded-lg bg-white mb-16 overflow-hidden">
           {renderMedia(
             heroToShow,
             project.name,
-            "w-full h-[915px] object-cover",
+            project.heroRatio === "Ratio_1x1"
+              ? "w-full aspect-square max-h-[85vh] object-cover"
+              : "w-full aspect-video max-h-[90vh] object-cover",
             1280,
             800
           )}
@@ -220,52 +224,79 @@ export function ProjectDetailClient({ project }: { project: ProjectData }) {
           <div className="flex flex-col gap-4 lg:gap-6">
 
             
-            {galleryToShow.length === 1 && (
-            <div className="w-full relative overflow-hidden rounded-lg bg-white">
-              {renderMedia(
-                galleryToShow[0],
-                `${project.name} gallery 1`,
-                "w-full h-[400px] lg:h-[650px] object-cover",
-                1346,
-                639
-              )}
-            </div>
-          )}
-            {galleryToShow.length > 1 && (
-              <div className="flex flex-col md:flex-row gap-4 lg:gap-6">
-                <div className="flex-1 relative overflow-hidden rounded-lg bg-white">
-                  {renderMedia(
-                    galleryToShow[0],
-                    `${project.name} gallery 1`,
-                    "w-full h-93 md:h-full object-cover",
-                    664,
-                    539
-                  )}
-                </div>
-                <div className="flex-1 relative overflow-hidden rounded-lg bg-white">
-                  {renderMedia(
-                    galleryToShow[1],
-                    `${project.name} gallery 2`,
-                    "w-full h-93 md:h-full object-cover",
-                    664,
-                    539
-                  )}
-                </div>
+            {/* Render galleryItems with ratio support if present in Strapi */}
+            {project.images.galleryItems && project.images.galleryItems.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+                {project.images.galleryItems.map((item, idx) => {
+                  const is1x1 = item.ratio === "1:1";
+                  return (
+                    <div
+                      key={idx}
+                      className={`relative overflow-hidden rounded-lg bg-white ${
+                        is1x1 ? "col-span-1 aspect-square" : "col-span-1 md:col-span-2 aspect-video"
+                      }`}
+                    >
+                      {renderMedia(
+                        item.media,
+                        `${project.name} gallery item ${idx + 1}`,
+                        "w-full h-full object-cover",
+                        1346,
+                        639
+                      )}
+                    </div>
+                  );
+                })}
               </div>
-            )}
+            ) : (
+              <>
+                {galleryToShow.length === 1 && (
+                  <div className="w-full relative overflow-hidden rounded-lg bg-white">
+                    {renderMedia(
+                      galleryToShow[0],
+                      `${project.name} gallery 1`,
+                      "w-full h-[400px] lg:h-[650px] object-cover",
+                      1346,
+                      639
+                    )}
+                  </div>
+                )}
+                {galleryToShow.length > 1 && (
+                  <div className="flex flex-col md:flex-row gap-4 lg:gap-6">
+                    <div className="flex-1 relative overflow-hidden rounded-lg bg-white">
+                      {renderMedia(
+                        galleryToShow[0],
+                        `${project.name} gallery 1`,
+                        "w-full h-93 md:h-full object-cover",
+                        664,
+                        539
+                      )}
+                    </div>
+                    <div className="flex-1 relative overflow-hidden rounded-lg bg-white">
+                      {renderMedia(
+                        galleryToShow[1],
+                        `${project.name} gallery 2`,
+                        "w-full h-93 md:h-full object-cover",
+                        664,
+                        539
+                      )}
+                    </div>
+                  </div>
+                )}
 
-            {galleryToShow.length > 2 && (
-              <div className="flex">
-                <div className="w-full relative overflow-hidden rounded-lg bg-white">
-                  {renderMedia(
-                    galleryToShow[2],
-                    `${project.name} gallery 3`,
-                    "w-full h-[400px] lg:h-[650px] object-cover",
-                    1346,
-                    639
-                  )}
-                </div>
-              </div>
+                {galleryToShow.length > 2 && (
+                  <div className="flex">
+                    <div className="w-full relative overflow-hidden rounded-lg bg-white">
+                      {renderMedia(
+                        galleryToShow[2],
+                        `${project.name} gallery 3`,
+                        "w-full h-[400px] lg:h-[650px] object-cover",
+                        1346,
+                        639
+                      )}
+                    </div>
+                  </div>
+                )}
+              </>
             )}
 
             {/* Challenge / Solution */}

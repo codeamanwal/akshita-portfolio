@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "https://portfolio-cms-a0hn.onrender.com";
 
 interface FolderData {
   id: number;
@@ -95,7 +95,7 @@ export default function WorkShowcase() {
 
         setFoldersData(merged);
       } catch (err) {
-        console.error("Failed to fetch Strapi data", err);
+        console.warn("Failed to fetch Strapi data", err);
         setFoldersData(staticFoldersData.map(f => ({ ...f, items: [], cardImage: "/BrandCraft.png" })));
       }
     };

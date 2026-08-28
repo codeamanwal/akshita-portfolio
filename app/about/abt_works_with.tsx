@@ -154,7 +154,7 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "https://portfolio-cms-a0hn.onrender.com";
 
 type AboutImage = {
   id: number;
@@ -163,8 +163,11 @@ type AboutImage = {
     id: number;
     name: string;
     alternativeText?: string | null;
-    url: string; // e.g. /uploads/work1.webp
+    url: string;
   };
+  image_1x1?: { url: string };
+  image_4x3?: { url: string };
+  image_2x1?: { url: string };
 };
 
 export default function WorksWith() {
@@ -174,7 +177,7 @@ export default function WorksWith() {
     (async () => {
       try {
         const res = await fetch(
-          `${STRAPI_URL}/api/about-images?populate=image&sort=order:asc&publicationState=live`,
+          `${STRAPI_URL}/api/about-images?populate=*&sort=order:asc&publicationState=live`,
           { cache: "no-store" }
         );
         if (!res.ok) {
@@ -185,15 +188,19 @@ export default function WorksWith() {
         const arr = Array.isArray(json?.data) ? json.data : [];
         setImages(arr);
       } catch (e) {
-        console.error("Failed to load images from Strapi:", e);
+        console.warn("Failed to load images from Strapi:", e);
         setImages([]);
       }
     })();
   }, []);
 
-  const imgUrl = (idx: number) => {
-    const url = images?.[idx]?.image?.url;
-    return url ? `${url}` : "/placeholder.png";
+  const imgUrl = (idx: number, ratio?: "1x1" | "4x3" | "2x1") => {
+    const item = images?.[idx];
+    if (!item) return "/placeholder.png";
+    if (ratio === "1x1" && item.image_1x1?.url) return item.image_1x1.url;
+    if (ratio === "4x3" && item.image_4x3?.url) return item.image_4x3.url;
+    if (ratio === "2x1" && item.image_2x1?.url) return item.image_2x1.url;
+    return item.image?.url || "/placeholder.png";
   };
 
   const imgAlt = (idx: number) =>

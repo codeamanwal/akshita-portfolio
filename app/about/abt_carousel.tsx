@@ -88,7 +88,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
-const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "https://portfolio-cms-a0hn.onrender.com";
 
 interface CarouselItem {
   id: number;
@@ -124,7 +124,7 @@ export default function AbtCarousel() {
 
         setCarouselItems(items);
       } catch (err) {
-        console.error("Error fetching carousel:", err);
+        console.warn("Error fetching carousel:", err);
       }
     }
 

@@ -96,11 +96,18 @@ export default async function Page({ params }: PageProps) {
     industry: item.industry || '',
     about: extractBlocksToText(item.about),
     services: item.services || '',
+    heroRatio: item.heroRatio || "Ratio_16x9",
     images: {
       hero: mapMedia(item.hero)[0] || null,
       heroMobile: mapMedia(item.heroMobile)[0] || null,
       gallery: mapMedia(item.gallery) || [],
       galleryMobile: mapMedia(item.galleryMobile) || [],
+      galleryItems: Array.isArray(item.galleryItems)
+        ? item.galleryItems.map((g: any) => ({
+            media: mapMedia(g.media)[0] || null,
+            ratio: g.ratio || "16:9",
+          })).filter((g: any) => g.media)
+        : [],
     },
     details: {
       challenge: extractBlocksToText(item.challenge),
