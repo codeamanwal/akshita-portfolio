@@ -69,13 +69,13 @@ export default async function JournalDetailPage(props: { params: Promise<PagePar
           {/* Content in two columns */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
             <div className="max-w-[350px] md:max-w-[620px]">
-              <p className="text-sm md:text-lg text-[#2C2216] leading-loose">
+              <p className="text-sm md:text-lg text-[#2C2216] leading-loose whitespace-pre-line">
                 {getText(content).split("\n\n")[0]}
               </p>
               <div className="hidden md:block border-b border-[#2C2216] pt-40 max-w-xl"></div>
             </div>
             <div className="max-w-[350px] md:max-w-[620px]">
-              <p className="text-sm md:text-lg text-[#2C2216] leading-loose">
+              <p className="text-sm md:text-lg text-[#2C2216] leading-loose whitespace-pre-line">
                 {getText(content).split("\n\n")[1] || ""}
               </p>
               <div className="md:hidden border-b border-[#2C2216] pt-20 max-w-xl"></div>
