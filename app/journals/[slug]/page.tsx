@@ -33,11 +33,16 @@ export default async function JournalDetailPage(props: { params: Promise<PagePar
     year: "numeric",
   })
 
-  // Convert Strapi rich text blocks into plain text
-  const getText = (blocks: any[]) =>
-    blocks?.map((block) =>
-      block.children.map((child: any) => child.text).join("")
-    ).join("\n\n")
+  // Convert Strapi rich text blocks into array of non-empty paragraphs
+  const getBlocks = (blocks: any[]) =>
+    blocks
+      ?.map((block) =>
+        block.children.map((child: any) => child.text).join("")
+      )
+      .filter((text) => text.trim() !== "") || []
+
+  const contentBlocks = getBlocks(content)
+  const content2Blocks = getBlocks(content2)
 
   return (
     <>
@@ -66,41 +71,43 @@ export default async function JournalDetailPage(props: { params: Promise<PagePar
             {Title}
           </h1>
 
-          {/* Content in two columns */}
+          {/* Content in two columns - No1 (left) + No2 (right) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
             <div className="max-w-[350px] md:max-w-[620px]">
-              <p className="text-sm md:text-lg text-[#2C2216] leading-loose whitespace-pre-line">
-                {getText(content).split("\n\n")[0]}
+              <p className="text-sm md:text-lg text-[#2C2216] leading-loose">
+                {contentBlocks[0] || ""}
               </p>
               <div className="hidden md:block border-b border-[#2C2216] pt-40 max-w-xl"></div>
             </div>
             <div className="max-w-[350px] md:max-w-[620px]">
-              <p className="text-sm md:text-lg text-[#2C2216] leading-loose whitespace-pre-line">
-                {getText(content).split("\n\n")[1] || ""}
+              <p className="text-sm md:text-lg text-[#2C2216] leading-loose">
+                {contentBlocks[1] || ""}
               </p>
               <div className="md:hidden border-b border-[#2C2216] pt-20 max-w-xl"></div>
             </div>
           </div>
 
-          {/* New Section with left heading and right content */}
+          {/* New Section with left heading and right content blocks */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
             {/* Left side - Section heading */}
             <div className="max-w-[360px] md:max-w-xl">
               <h2 className="text-2xl md:text-[32px] font-domine text-[#51331B] md:leading-[43px] md:tracking-[-1px]">
-                {getText(oneLiner)}
+                {getBlocks(oneLiner).join(" ")}
               </h2>
             </div>
 
-            {/* Right side - Content sections */}
-            <div className="space-y-12 max-w-[340px] md:max-w-[550px]">
-              
-
-              <div>
-                
-                <p className="text-sm md:text-base text-[#2C2216] leading-relaxed">
-                  {getText(content2)}
-                </p>
-              </div>
+            {/* Right side - Each content2 block rendered separately */}
+            <div className="space-y-10 max-w-[340px] md:max-w-[550px]">
+              {content2Blocks.map((block, index) => (
+                <div key={index}>
+                  <p className="text-sm md:text-base text-[#2C2216] leading-relaxed">
+                    {block}
+                  </p>
+                  {index < content2Blocks.length - 1 && (
+                    <div className="border-b border-[#2C2216]/20 mt-10"></div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
 
