@@ -57,7 +57,7 @@ export default async function Page({ params }: PageProps) {
   const slug = projectId;
 
   const res = await fetchFromStrapi(
-    `/api/project-details?filters[slug][$eq]=${encodeURIComponent(slug)}&populate=*`
+    `/api/project-details?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[hero]=true&populate[heroMobile]=true&populate[gallery]=true&populate[galleryMobile]=true&populate[galleryItems][populate][image]=true&populate[galleryItems][populate][imageMobile]=true`
   );
 
   const item = res?.data?.[0];
@@ -104,8 +104,8 @@ export default async function Page({ params }: PageProps) {
       galleryMobile: mapMedia(item.galleryMobile) || [],
       galleryItems: Array.isArray(item.galleryItems)
         ? item.galleryItems.map((g: any) => ({
-            media: mapMedia(g.media)[0] || null,
-            ratio: g.ratio || "16:9",
+            media: mapMedia(g.image || g.media)[0] || null,
+            ratio: g.ratio || "Ratio_16x9",
           })).filter((g: any) => g.media)
         : [],
     },

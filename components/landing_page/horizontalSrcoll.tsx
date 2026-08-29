@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { getStrapiMedia } from "@/lib/strapi";
 
 type CardType = {
   id: number;
@@ -50,7 +51,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ cards: propCards })
                 if (gi.image?.url) {
                   allCards.push({
                     id: item.id * 1000 + idx,
-                    url: gi.image.url,
+                    url: getStrapiMedia(gi.image.url),
                     title: item.slug || `Brand ${item.id}`,
                     order: gi.order ?? item.order ?? 999,
                   });
@@ -60,7 +61,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ cards: propCards })
               // Fallback: use the main brand image if no gallery items
               allCards.push({
                 id: item.id * 1000,
-                url: item.brand.url,
+                url: getStrapiMedia(item.brand.url),
                 title: item.slug || `Brand ${item.id}`,
                 order: item.order ?? 999,
               });
