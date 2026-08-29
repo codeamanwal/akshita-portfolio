@@ -9,6 +9,7 @@ type CardType = {
   id: number;
   url: string;
   title: string;
+  order?: number;
 };
 
 // Add interface for props
@@ -37,19 +38,50 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ cards: propCards })
     const fetchImages = async () => {
       try {
         const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "https://portfolio-cms-a0hn.onrender.com";
-        const res = await fetch(`${baseUrl}/api/about-images?populate=*&sort[0]=order:asc`);
+        const res = await fetch(`${baseUrl}/api/images?populate=*&sort[0]=order:asc`);
         if (!res.ok) return;
         const json = await res.json();
         if (json.data) {
-          const mapped = json.data.map((item: any) => {
-            const url = item.image_1x1?.url || item.image_4x3?.url || item.image_2x1?.url || item.image?.url || "/placeholder.png";
-            return {
-              id: item.id,
-              url: url,
-              title: item.title || `Brand ${item.id}`,
-            };
+          const allCards: CardType[] = [];
+          json.data.forEach((item: any) => {
+            // Add each ratio image as a separate card with its own order
+            if (item.image_1x1?.url) {
+              allCards.push({
+                id: item.id * 100 + 1,
+                url: item.image_1x1.url,
+                title: item.slug || `Brand ${item.id}`,
+                order: item.order_1x1 ?? item.order ?? 999,
+              });
+            }
+            if (item.image_4x3?.url) {
+              allCards.push({
+                id: item.id * 100 + 2,
+                url: item.image_4x3.url,
+                title: item.slug || `Brand ${item.id}`,
+                order: item.order_4x3 ?? item.order ?? 999,
+              });
+            }
+            if (item.image_2x1?.url) {
+              allCards.push({
+                id: item.id * 100 + 3,
+                url: item.image_2x1.url,
+                title: item.slug || `Brand ${item.id}`,
+                order: item.order_2x1 ?? item.order ?? 999,
+              });
+            }
+            // Fallback: if no ratio images, use the main brand image
+            if (!item.image_1x1?.url && !item.image_4x3?.url && !item.image_2x1?.url && item.brand?.url) {
+              allCards.push({
+                id: item.id * 100,
+                url: item.brand.url,
+                title: item.slug || `Brand ${item.id}`,
+                order: item.order ?? 999,
+              });
+            }
           });
-          setFetchedCards(mapped);
+          // Sort all cards by their individual order
+          allCards.sort((a, b) => (a.order ?? 999) - (b.order ?? 999));
+          setFetchedCards(allCards);
         }
       } catch (err) {
         console.warn("Failed to fetch images:", err);
