@@ -44,35 +44,22 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ cards: propCards })
         if (json.data) {
           const allCards: CardType[] = [];
           json.data.forEach((item: any) => {
-            // Add each ratio image as a separate card with its own order
-            if (item.image_1x1?.url) {
-              allCards.push({
-                id: item.id * 100 + 1,
-                url: item.image_1x1.url,
-                title: item.slug || `Brand ${item.id}`,
-                order: item.order_1x1 ?? item.order ?? 999,
+            // Use galleryImages repeatable component
+            if (item.galleryImages && item.galleryImages.length > 0) {
+              item.galleryImages.forEach((gi: any, idx: number) => {
+                if (gi.image?.url) {
+                  allCards.push({
+                    id: item.id * 1000 + idx,
+                    url: gi.image.url,
+                    title: item.slug || `Brand ${item.id}`,
+                    order: gi.order ?? item.order ?? 999,
+                  });
+                }
               });
-            }
-            if (item.image_4x3?.url) {
+            } else if (item.brand?.url) {
+              // Fallback: use the main brand image if no gallery items
               allCards.push({
-                id: item.id * 100 + 2,
-                url: item.image_4x3.url,
-                title: item.slug || `Brand ${item.id}`,
-                order: item.order_4x3 ?? item.order ?? 999,
-              });
-            }
-            if (item.image_2x1?.url) {
-              allCards.push({
-                id: item.id * 100 + 3,
-                url: item.image_2x1.url,
-                title: item.slug || `Brand ${item.id}`,
-                order: item.order_2x1 ?? item.order ?? 999,
-              });
-            }
-            // Fallback: if no ratio images, use the main brand image
-            if (!item.image_1x1?.url && !item.image_4x3?.url && !item.image_2x1?.url && item.brand?.url) {
-              allCards.push({
-                id: item.id * 100,
+                id: item.id * 1000,
                 url: item.brand.url,
                 title: item.slug || `Brand ${item.id}`,
                 order: item.order ?? 999,
