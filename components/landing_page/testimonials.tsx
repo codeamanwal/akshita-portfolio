@@ -26,39 +26,6 @@
 
 //   return (
 //     <div className="bg-[#40352F] py-16 px-4 text-center text-white">
-//       <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif mb-10">
-//         <span className="font-sans">/letters</span> from clients
-//       </h2>
-
-//       {/* Mobile: vertical stack */}
-//       {/* Mobile: vertical stack */}
-//       <div className="relative flex flex-col items-center justify-center lg:hidden">
-//         <button 
-//           onClick={prev}
-//           className="mb-4 z-10 p-2 hover:scale-105 transition cursor-pointer"
-//         >
-//           <Image src="/arrowupmobile.png" alt="up" width={24} height={24} />
-//         </button>
-
-//         <div className="relative h-[420px] w-[90vw] max-w-[340px] flex items-center justify-center overflow-visible">
-//           {cardData.map((card, i) => {
-//             const position = (i - current + cardData.length) % cardData.length;
-
-//             const styles: { [key: number]: string } = {
-//               0: "rotate-[0deg] -translate-y-[120px] scale-[0.95] z-0",
-//               1: "rotate-0 translate-y-0 scale-100 z-10",
-//               2: "rotate-[-12deg] translate-y-[90px] scale-[0.95] z-0",
-//             };
-
-//             return (
-//               <div
-//                 key={card.id}
-//                 className={`absolute top- left-1/2 w-full -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ease-in-out transform ${
-//                   styles[position] || "opacity-0 scale-90"
-//                 } ${position === 1 ? "brightness-100" : "brightness-65"}`}
-//               >
-//                 <Image
-//                   src={card.url}
 //                   alt={`Card ${card.id}`}
 //                   width={340}
 //                   height={400}
@@ -318,70 +285,60 @@ export default function Testimonials() {
       </div>
 
       {/* Mobile Layout */}
-      <div className="relative flex flex-col items-center justify-center lg:hidden">
+      <div className="relative flex flex-col items-center justify-center lg:hidden my-8">
         <button
           onClick={prev}
-          className="mb-4 z-10 p-2 hover:scale-105 transition cursor-pointer"
+          className="mb-6 z-10 p-2 hover:scale-105 transition cursor-pointer"
         >
           <Image src="/arrowupmobile.png" alt="up" width={24} height={24} />
         </button>
 
-        <div className="relative h-[420px] w-[90vw] max-w-[360px] flex items-center justify-center overflow-visible">
+        <div className="relative h-[370px] w-[90vw] max-w-[340px] flex items-center justify-center overflow-visible">
           {testimonials.map((t, i) => {
             const position = (i - current + 2 + testimonials.length) % testimonials.length;
 
             const styles: { [key: number]: string } = {
-              0: "rotate-[12deg] -translate-y-[90px] scale-[0.95] z-0",
-              1: "rotate-0 translate-y-0 scale-100 z-10",
-              2: "rotate-[-12deg] translate-y-[90px] scale-[0.95] z-0",
+              0: "rotate-[-4deg] -translate-y-5 scale-[0.95] z-0 opacity-40",
+              1: "rotate-0 translate-y-0 scale-100 z-10 opacity-100 shadow-xl",
+              2: "rotate-[4deg] translate-y-5 scale-[0.95] z-0 opacity-70",
             };
-
-            const numStr = t.number ? String(t.number).padStart(2, "0") + "." : "01.";
-            const cleanQuote = typeof t.quote === "string" ? t.quote.replace(/^["']|["']$/g, "") : "";
 
             return (
               <div
                 key={t.id}
-                className={`absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ease-in-out transform h-[360px] bg-[#EAE3D2] text-black 
-                  shadow-xl p-5 flex gap-4 rounded-sm border border-[#d6cbba]
-                  ${styles[position] || "opacity-0 scale-90"} 
-                  ${position === 1 ? "brightness-100" : "brightness-65"}`}
-                style={{
-                  backgroundImage: "url('/paperboard-texture.png')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
+                className={`absolute top-0 left-0 w-full h-[350px] bg-[#e4d9bc] text-black 
+                  shadow-lg p-5 flex flex-col rounded-md border border-[#d6cbba]/60
+                  transition-all duration-500 ease-in-out transform origin-center
+                  ${styles[position] || "opacity-0 scale-90 pointer-events-none"} 
+                  ${position === 1 ? "brightness-100" : "brightness-75"}`}
               >
-                {/* Left side: Name (Signature font) + Brand */}
-                <div className="flex flex-col justify-between w-[40%] text-left py-1">
-                  <div>
-                    <h3 className={`${caveat.className} text-3xl sm:text-4xl text-[#3D2616] font-semibold leading-[1.1] whitespace-pre-line tracking-wide`}>
-                      {t.name}
-                    </h3>
-                  </div>
-                  <div>
-                    <p className="font-domine uppercase text-xs sm:text-sm font-bold text-[#3D2616] leading-tight tracking-wider whitespace-pre-line">
+                {/* Top row: name + number */}
+                <div className="flex justify-between items-start mb-4">
+                  <h3 className="text-xl sm:text-2xl font-[cursive] italic leading-tight text-[#3D2616] pr-2 break-words text-left">
+                    {t.name}
+                  </h3>
+                  <span className="text-red-700 font-bold text-sm sm:text-base border border-red-700 px-2 py-0.5 shrink-0">
+                    {t.number ? String(t.number).padStart(2, "0") : "01"}
+                  </span>
+                </div>
+
+                {/* Main content divided */}
+                <div className="flex flex-1 overflow-hidden">
+                  {/* Left side (brand at bottom) */}
+                  <div className="flex flex-col justify-between w-[35%] pr-2 shrink-0 text-left">
+                    <div></div>
+                    <p className="text-[10px] uppercase tracking-wide font-semibold text-[#3D2616] leading-tight break-words">
                       {t.brand}
                     </p>
                   </div>
-                </div>
 
-                {/* Vertical Divider */}
-                <div className="w-[1.5px] bg-[#3D2616]/40 my-1"></div>
+                  {/* Divider line */}
+                  <div className="w-[1px] bg-gray-500 opacity-40 my-2 shrink-0"></div>
 
-                {/* Right side: Number Box + Quote */}
-                <div className="flex-1 flex flex-col justify-between text-left py-1">
-                  <div className="flex justify-end">
-                    <div className="border border-dashed border-[#3D2616]/70 px-2.5 py-1 text-center">
-                      <span className="font-domine text-[#9E2A2B] text-lg font-bold tracking-widest">
-                        {numStr}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="my-auto pr-1">
-                    <p className="font-dm-sans text-[12px] sm:text-[13px] text-[#2D1F14] leading-[1.5] font-normal">
-                      "{cleanQuote}"
+                  {/* Right side (quote) */}
+                  <div className="flex-1 pl-3 flex items-center overflow-y-auto max-h-[220px] scrollbar-thin text-left">
+                    <p className="italic text-[12px] sm:text-[13px] leading-relaxed text-[#2D1F14]">
+                      “{t.quote}”
                     </p>
                   </div>
                 </div>
@@ -392,7 +349,7 @@ export default function Testimonials() {
 
         <button
           onClick={next}
-          className="mt-4 z-10 p-2 hover:scale-105 transition cursor-pointer"
+          className="mt-6 z-10 p-2 hover:scale-105 transition cursor-pointer"
         >
           <Image src="/arrowdownmobile.png" alt="down" width={24} height={24} />
         </button>
