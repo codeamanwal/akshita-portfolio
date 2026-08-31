@@ -11,6 +11,7 @@ type CardType = {
   url: string;
   title: string;
   order?: number;
+  ratio?: "1:1" | "4:3" | "2:1";
 };
 
 // Add interface for props
@@ -54,6 +55,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ cards: propCards })
                     url: getStrapiMedia(gi.image.url),
                     title: item.slug || `Brand ${item.id}`,
                     order: gi.order ?? item.order ?? 999,
+                    ratio: gi.ratio,
                   });
                 }
               });
@@ -64,6 +66,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ cards: propCards })
                 url: getStrapiMedia(item.brand.url),
                 title: item.slug || `Brand ${item.id}`,
                 order: item.order ?? 999,
+                ratio: "1:1",
               });
             }
           });
@@ -115,7 +118,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ cards: propCards })
                   index % 2 === 0 ? "lg:top-0" : "lg:top-[300px]"
                 }`}
               >
-                <Card card={card} index={index} />
+                <Card card={card} />
               </div>
             ))}
           </motion.div>
@@ -125,33 +128,49 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ cards: propCards })
   );
 };
 
-const Card = ({ card, index }: { card: CardType; index: number }) => {
-  // Different desktop sizes for variety
-  const desktopSizes = [
-    { h: 300, w: 300 },
-    { h: 250, w: 300 },
-    { h: 300, w: 500 },
-    { h: 200, w: 200 },
-    { h: 300, w: 300 },
-  ];
-  const { h, w } = desktopSizes[index % desktopSizes.length];
+const Card = ({ card }: { card: CardType }) => {
+  // Normalize ratio — Strapi may send "1:1" or "Ratio_1x1" etc.
+  const raw = card.ratio || "1:1";
+  const ratio = raw === "Ratio_1x1" ? "1:1"
+    : raw === "Ratio_4x3" ? "4:3"
+    : raw === "Ratio_16x9" ? "16:9"
+    : raw; // already "1:1" / "4:3" / "2:1"
+
+  const ratioStyles: {
+    [key: string]: { w: number; h: number; className: string };
+  } = {
+    "1:1": {
+      w: 300,
+      h: 300,
+      className: "w-[180px] h-[180px] lg:w-[300px] lg:h-[300px] aspect-square",
+    },
+    "4:3": {
+      w: 360,
+      h: 270,
+      className: "w-[200px] h-[150px] lg:w-[360px] lg:h-[270px] aspect-[4/3]",
+    },
+    "16:9": {
+      w: 400,
+      h: 225,
+      className: "w-[240px] h-[135px] lg:w-[400px] lg:h-[225px] aspect-video",
+    },
+    "2:1": {
+      w: 400,
+      h: 200,
+      className: "w-[240px] h-[120px] lg:w-[400px] lg:h-[200px] aspect-[2/1]",
+    },
+  };
+
+  const style = ratioStyles[ratio] || ratioStyles["1:1"];
 
   return (
-    <div
-      className="rounded-xl overflow-hidden shadow-md bg-white w-[180px] h-[180px] lg:h-[var(--desktop-height)] lg:w-[var(--desktop-width)]"
-      style={
-        {
-          "--desktop-height": `${h}px`,
-          "--desktop-width": `${w}px`,
-        } as React.CSSProperties
-      }
-    >
+    <div className={`rounded-xl overflow-hidden shadow-md bg-white ${style.className}`}>
       <Image
         src={card.url}
         alt={card.title}
-        width={w}
-        height={h}
-        className="object-fill w-full h-full"
+        width={style.w}
+        height={style.h}
+        className="object-cover w-full h-full"
       />
     </div>
   );

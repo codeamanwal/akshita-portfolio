@@ -242,20 +242,28 @@ export function ProjectDetailClient({ project }: { project: ProjectData }) {
             {project.images.galleryItems && project.images.galleryItems.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
                 {project.images.galleryItems.map((item, idx) => {
-                  const is1x1 = item.ratio === "1:1";
+                  // Strapi sends "Ratio_1x1" or "Ratio_16x9" or "Ratio_4x3"
+                  const r = item.ratio || "Ratio_16x9";
+                  const is1x1 = r === "Ratio_1x1" || r === "1:1";
+                  const is4x3 = r === "Ratio_4x3" || r === "4:3";
+                  const aspectClass = is1x1
+                    ? "aspect-square"
+                    : is4x3
+                    ? "aspect-[4/3]"
+                    : "aspect-video";
+                  // 1:1 images fit in single column; wide images span full width
+                  const colSpanClass = is1x1 ? "col-span-1" : "col-span-1 md:col-span-2";
                   return (
                     <div
                       key={idx}
-                      className={`relative overflow-hidden rounded-lg bg-white ${
-                        is1x1 ? "col-span-1 aspect-square" : "col-span-1 md:col-span-2 aspect-video"
-                      }`}
+                      className={`relative overflow-hidden rounded-lg bg-white ${colSpanClass} ${aspectClass}`}
                     >
                       {renderMedia(
                         item.media,
                         `${project.name} gallery item ${idx + 1}`,
                         "w-full h-full object-cover",
-                        1346,
-                        639
+                        is1x1 ? 800 : is4x3 ? 1200 : 1346,
+                        is1x1 ? 800 : is4x3 ? 900 : 639
                       )}
                     </div>
                   );
