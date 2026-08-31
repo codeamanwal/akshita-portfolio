@@ -57,7 +57,7 @@ export default async function Page({ params }: PageProps) {
   const slug = projectId;
 
   const res = await fetchFromStrapi(
-    `/api/project-details?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[hero]=true&populate[heroMobile]=true&populate[gallery]=true&populate[galleryMobile]=true&populate[galleryItems][populate][image]=true&populate[galleryItems][populate][imageMobile]=true`
+    `/api/project-details?filters[slug][$eq]=${encodeURIComponent(slug)}&populate[hero]=true&populate[heroMobile]=true&populate[gallery]=true&populate[galleryMobile]=true&populate[services]=true&populate[galleryItems][populate][image]=true&populate[galleryItems][populate][imageMobile]=true`
   );
 
   const item = res?.data?.[0];
