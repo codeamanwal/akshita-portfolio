@@ -11,7 +11,7 @@ type CardType = {
   url: string;
   title: string;
   order?: number;
-  ratio?: "1:1" | "4:3" | "2:1";
+  ratio?: string; // e.g. "1:1", "4:3", "2:1", "Ratio_1x1", "Ratio_16x9"
 };
 
 // Add interface for props
