@@ -46,21 +46,24 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ cards: propCards })
         if (json.data) {
           const allCards: CardType[] = [];
           json.data.forEach((item: any) => {
-            // Use galleryImages repeatable component
-            if (item.galleryImages && item.galleryImages.length > 0) {
-              item.galleryImages.forEach((gi: any, idx: number) => {
-                if (gi.image?.url) {
-                  allCards.push({
-                    id: item.id * 1000 + idx,
-                    url: getStrapiMedia(gi.image.url),
-                    title: item.slug || `Brand ${item.id}`,
-                    order: gi.order ?? item.order ?? 999,
-                    ratio: gi.ratio,
-                  });
-                }
+            // Try galleryImages repeatable component first
+            const validGalleryItems = (item.galleryImages || []).filter(
+              (gi: any) => gi.image?.url
+            );
+
+            if (validGalleryItems.length > 0) {
+              // Use gallery images
+              validGalleryItems.forEach((gi: any, idx: number) => {
+                allCards.push({
+                  id: item.id * 1000 + idx,
+                  url: getStrapiMedia(gi.image.url),
+                  title: item.slug || `Brand ${item.id}`,
+                  order: gi.order ?? item.order ?? 999,
+                  ratio: gi.ratio,
+                });
               });
             } else if (item.brand?.url) {
-              // Fallback: use the main brand image if no gallery items
+              // Fallback: use the main brand image only if no valid gallery images
               allCards.push({
                 id: item.id * 1000,
                 url: getStrapiMedia(item.brand.url),
