@@ -131,13 +131,18 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ cards: propCards })
   );
 };
 
+const normalizeRatio = (raw?: string): string => {
+  if (!raw) return "1:1";
+  const cleaned = raw.replace(/^Ratio_/i, "").replace(/x/i, ":").trim();
+  if (cleaned === "4:3") return "4:3";
+  if (cleaned === "2:1") return "2:1";
+  if (cleaned === "16:9") return "16:9";
+  if (cleaned === "1:1") return "1:1";
+  return "1:1";
+};
+
 const Card = ({ card }: { card: CardType }) => {
-  // Normalize ratio — Strapi may send "1:1" or "Ratio_1x1" etc.
-  const raw = card.ratio || "1:1";
-  const ratio = raw === "Ratio_1x1" ? "1:1"
-    : raw === "Ratio_4x3" ? "4:3"
-    : raw === "Ratio_16x9" ? "16:9"
-    : raw; // already "1:1" / "4:3" / "2:1"
+  const ratio = normalizeRatio(card.ratio);
 
   const ratioStyles: {
     [key: string]: { w: number; h: number; className: string };

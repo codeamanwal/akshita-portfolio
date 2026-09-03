@@ -98,7 +98,7 @@ export function ProjectDetailClient({ project }: { project: ProjectData }) {
           {renderMedia(
             heroToShow,
             project.name,
-            project.heroRatio === "Ratio_1x1"
+            project.heroRatio === "Ratio_1x1" || (project.heroRatio as any) === "1:1"
               ? "w-full aspect-square max-h-[85vh] object-cover"
               : "w-full aspect-video max-h-[90vh] object-cover",
             1280,
