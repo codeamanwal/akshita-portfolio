@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { getStrapiMedia } from "@/lib/strapi";
 
-type CardType = {
+export type CardType = {
   id: number;
   url: string;
   title: string;
@@ -15,7 +15,7 @@ type CardType = {
 };
 
 // Add interface for props
-interface HorizontalScrollProps {
+export interface HorizontalScrollProps {
   cards?: CardType[]; // Make it optional so it can work both ways
 }
 
@@ -40,7 +40,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({ cards: propCards })
     const fetchImages = async () => {
       try {
         const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "https://portfolio-cms-a0hn.onrender.com";
-        const res = await fetch(`${baseUrl}/api/images?populate=*&sort[0]=order:asc`);
+        const res = await fetch(`${baseUrl}/api/images?populate[brand]=true&populate[galleryImages][populate][image]=true&sort[0]=order:asc`);
         if (!res.ok) return;
         const json = await res.json();
         if (json.data) {
