@@ -204,7 +204,7 @@ const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "https://portfolio-cms-
 async function getHero() {
   try {
     const res = await fetch(`${STRAPI_URL}/api/play-heroes?populate=heroImage`, {
-      cache: "no-store",
+      next: { revalidate: 60 },
     })
     if (!res.ok) return null
     const data = await res.json()
@@ -219,7 +219,7 @@ async function getHero() {
 async function getProducts() {
   try {
     const res = await fetch(`${STRAPI_URL}/api/play-products?populate=images&sort[0]=order:asc`, {
-      cache: "no-store",
+      next: { revalidate: 60 },
     })
     if (!res.ok) return []
     const data = await res.json()

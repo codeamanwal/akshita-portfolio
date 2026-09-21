@@ -5,7 +5,9 @@ function getBaseUrl() {
 export async function fetchFromStrapi(path: string) {
   const baseUrl = getBaseUrl();
   try {
-    const res = await fetch(`${baseUrl}${path}`, { cache: 'no-store' });
+    const res = await fetch(`${baseUrl}${path}`, {
+      next: { revalidate: 60 },
+    });
     if (!res.ok) {
       console.warn(`[Strapi Warning] Fetch returned status ${res.status} for path "${path}"`);
       return null;

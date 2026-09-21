@@ -1,6 +1,25 @@
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/navbar'
-// import type { PageProps } from "next"
+
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "https://portfolio-cms-a0hn.onrender.com";
+    const res = await fetch(`${baseUrl}/api/journals?fields[0]=slug`, {
+      next: { revalidate: 60 },
+    });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return (data?.data || [])
+      .filter((item: any) => item.slug)
+      .map((item: any) => ({
+        slug: item.slug,
+      }));
+  } catch {
+    return [];
+  }
+}
 
 interface PageParams {
   slug: string
@@ -13,7 +32,7 @@ export default async function JournalDetailPage(props: { params: Promise<PagePar
   const baseUrl = process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337";
   const res = await fetch(
     `${baseUrl}/api/journals?filters[slug][$eq]=${slug}&populate=*`,
-    { cache: "no-store" }
+    { next: { revalidate: 60 } }
   )
   if (!res.ok) {
     notFound()

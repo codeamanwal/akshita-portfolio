@@ -177,8 +177,7 @@ export default function WorksWith() {
     (async () => {
       try {
         const res = await fetch(
-          `${STRAPI_URL}/api/about-images?populate=*&sort=order:asc&publicationState=live`,
-          { cache: "no-store" }
+          `${STRAPI_URL}/api/about-images?populate=*&sort=order:asc&publicationState=live`
         );
         if (!res.ok) {
           setImages([]);

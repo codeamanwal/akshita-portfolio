@@ -26,6 +26,22 @@ import { notFound } from 'next/navigation';
 import { fetchFromStrapi, getStrapiMedia } from '@/lib/strapi';
 import ProjectDetailClient, { MediaItem, ProjectData } from './ProjectDetailClient';
 
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  try {
+    const res = await fetchFromStrapi('/api/project-details?fields[0]=slug');
+    if (!res?.data || !Array.isArray(res.data)) return [];
+    return res.data
+      .filter((item: any) => item.slug)
+      .map((item: any) => ({
+        projectId: item.slug,
+      }));
+  } catch {
+    return [];
+  }
+}
+
 function extractBlocksToText(blocks: any): string {
   if (!blocks) return '';
   if (typeof blocks === 'string') return blocks;
